@@ -89,7 +89,7 @@ header nav a:hover {
   font-size: 5rem;
   font-weight: 800;
   margin-bottom: 1rem;
-  white-space: nowrap; /* keep your name on a single line */
+  white-space: nowrap;
 }
 
 .typed-text {
@@ -264,24 +264,29 @@ header nav a:hover {
 }
 
 .project-card {
-  background: #252525;
-  border-radius: 12px;
+  position: relative;
+  background: rgba(37, 37, 37, 0.6);
+  border-radius: 16px;
   overflow: hidden;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 8px 24px var(--dark-shadow);
-  transition: transform 0.4s, box-shadow 0.4s;
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border 0.4s ease;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
-}
-
-.project-card:hover {
-  transform: translateY(-10px) scale(1.03);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
 }
 
 .project-card img {
   width: 100%;
   height: 200px;
   object-fit: cover;
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.project-card:hover img {
+  transform: scale(1.1);
+  filter: brightness(0.7);
 }
 
 .project-content {
@@ -290,6 +295,8 @@ header nav a:hover {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  position: relative;
+  z-index: 2;
 }
 
 .project-content h3 {
@@ -320,6 +327,63 @@ header nav a:hover {
   font-weight: 600;
 }
 
+/* Modern overlay on hover */
+.project-overlay {
+  position: absolute;
+  bottom: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(18, 18, 18, 0.95), rgba(18, 18, 18, 0.6));
+  color: #fff;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.2rem;
+  transition: bottom 0.5s ease;
+  text-align: center;
+  z-index: 3;
+}
+
+.project-card:hover .project-overlay {
+  bottom: 0;
+}
+
+.project-overlay h4 {
+  font-size: 1.6rem;
+  color: var(--dark-accent);
+}
+
+.project-overlay p {
+  font-size: 1rem;
+  color: #aaa;
+  margin-bottom: 1rem;
+}
+
+.project-overlay a {
+  background: var(--dark-accent);
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.project-overlay a:hover {
+  background: #3a8cff;
+  transform: translateY(-3px);
+}
+
+/* Glowing border effect */
+.project-card:hover {
+  border: 1px solid var(--dark-accent);
+  box-shadow: 0 0 30px rgba(74, 158, 255, 0.5);
+}
+
+/* Project Link (legacy if used) */
 .project-link {
   background: var(--dark-accent);
   color: #fff;
