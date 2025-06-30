@@ -1,32 +1,31 @@
-document.addEventListener("DOMContentLoaded", function() {
-  const typedText = document.getElementById("typed");
-  const words = ["Akash Patil", "a Full-Stack Developer", "a DevOps Engineer"];
-  let wordIndex = 0;
+document.addEventListener("DOMContentLoaded", () => {
+  const typedTextSpan = document.querySelector(".typed-text");
+  const textArray = ["Akash Patil"];
+  const typingDelay = 150;
+  const erasingDelay = 100;
+  const newTextDelay = 2000;
+  let textArrayIndex = 0;
   let charIndex = 0;
-  let currentWord = "";
-  let isDeleting = false;
 
   function type() {
-    if (wordIndex >= words.length) wordIndex = 0;
-    currentWord = words[wordIndex];
-
-    if (isDeleting) {
-      typedText.textContent = currentWord.substring(0, charIndex--);
-      if (charIndex < 0) {
-        isDeleting = false;
-        wordIndex++;
-        setTimeout(type, 400);
-        return;
-      }
+    if (charIndex < textArray[textArrayIndex].length) {
+      typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+      charIndex++;
+      setTimeout(type, typingDelay);
     } else {
-      typedText.textContent = currentWord.substring(0, charIndex++);
-      if (charIndex > currentWord.length) {
-        isDeleting = true;
-        setTimeout(type, 2000);
-        return;
-      }
+      setTimeout(erase, newTextDelay);
     }
-    setTimeout(type, isDeleting ? 80 : 120);
   }
+
+  function erase() {
+    if (charIndex > 0) {
+      typedTextSpan.textContent = textArray[textArrayIndex].substring(0, charIndex - 1);
+      charIndex--;
+      setTimeout(erase, erasingDelay);
+    } else {
+      setTimeout(type, typingDelay);
+    }
+  }
+
   type();
 });

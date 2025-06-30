@@ -1,4 +1,3 @@
-/* Root Variables */
 :root {
   --dark-bg: #121212;
   --dark-card: #1e1e1e;
@@ -9,7 +8,6 @@
   --accent-gradient: linear-gradient(135deg, #4a9eff, #58d9ff);
 }
 
-/* Reset & Base */
 * {
   margin: 0;
   padding: 0;
@@ -75,7 +73,7 @@ header nav a:hover::after {
 
 /* Hero Section */
 .hero-section {
-  min-height: 150vh; /* 1.5× bigger */
+  min-height: 100vh;
   padding: 12rem 2rem 6rem;
   display: flex;
   justify-content: center;
@@ -84,12 +82,12 @@ header nav a:hover::after {
 
 .hero-container {
   display: flex;
+  flex-wrap: wrap;
   gap: 5rem;
   max-width: 1400px;
   width: 100%;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
 }
 
 .hero-text {
@@ -155,49 +153,33 @@ header nav a:hover::after {
   transform: translateY(-5px) scale(1.2);
 }
 
-/* Profile Image styling */
+/* Unique Profile Frame */
 .hero-image {
   flex: 1;
   min-width: 300px;
-}
-
-.image-wrapper {
-  width: 320px;
-  height: 420px;
-  background: var(--accent-gradient);
-  clip-path: polygon(
-    50% 0%, 
-    90% 20%, 
-    100% 60%, 
-    50% 100%, 
-    0% 60%, 
-    10% 20%
-  );
   display: flex;
-  align-items: center;
   justify-content: center;
-  padding: 10px;
 }
 
-.image-wrapper img {
+.profile-frame {
+  width: 250px;
+  height: 250px;
+  background: var(--accent-gradient);
+  clip-path: path("M125,0 C175,0 225,50 225,100 C225,175 125,250 125,250 C125,250 25,175 25,100 C25,50 75,0 125,0 Z");
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(74, 158, 255, 0.3);
+  transition: transform 0.4s ease;
+}
+
+.profile-frame:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(74, 158, 255, 0.6);
+}
+
+.profile-frame img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  clip-path: polygon(
-    50% 0%, 
-    90% 20%, 
-    100% 60%, 
-    50% 100%, 
-    0% 60%, 
-    10% 20%
-  );
-  border-radius: 20px;
-  transition: all 0.5s;
-}
-
-.image-wrapper img:hover {
-  transform: scale(1.05);
-  filter: brightness(1.2);
 }
 
 /* Skills Section */
@@ -391,16 +373,44 @@ footer {
 /* Responsive */
 @media (max-width: 768px) {
   .hero-section {
-    min-height: auto;
     padding-top: 10rem;
     padding-bottom: 4rem;
   }
-
   .hero-text h1 {
     font-size: 3rem;
   }
-
   .hero-container {
     flex-direction: column;
   }
+}
+/* Profile Image - Bigger Frame */
+.profile-frame {
+  width: 320px;
+  height: 320px;
+  background: var(--accent-gradient);
+  clip-path: path("M160,0 C230,0 300,70 300,140 C300,245 160,320 160,320 C160,320 20,245 20,140 C20,70 90,0 160,0 Z");
+  overflow: hidden;
+  box-shadow: 0 0 25px rgba(74, 158, 255, 0.3);
+  transition: transform 0.4s ease;
+}
+
+.profile-frame:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 35px rgba(74, 158, 255, 0.6);
+}
+
+.profile-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Backend Icons - Add Redis */
+.skill-icon[title="Redis"] i::before {
+  content: "\f1cb"; /* database icon */
+}
+
+/* DevOps Icons - Add Cloudinary */
+.skill-icon[title="Cloudinary"] i::before {
+  content: "\f0c2"; /* cloud icon */
 }
