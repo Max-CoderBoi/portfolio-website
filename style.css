@@ -1,11 +1,11 @@
 :root {
-  --dark-bg: #121212;
-  --dark-card: #1e1e1e;
-  --dark-text: #f0f0f0;
-  --dark-accent: #4a9eff;
-  --dark-hover: #2d2d2d;
-  --dark-shadow: rgba(0, 0, 0, 0.4);
-  --accent-gradient: linear-gradient(135deg, #4a9eff, #58d9ff);
+  --dark-bg: #000000;
+  --dark-card: #111111;
+  --dark-text: #f5f5f5;
+  --dark-accent: #ff1c1c;
+  --dark-hover: rgba(255, 28, 28, 0.15);
+  --dark-shadow: rgba(255, 28, 28, 0.3);
+  --accent-gradient: linear-gradient(135deg, #ff1c1c, #b30000);
 }
 
 * {
@@ -24,7 +24,7 @@ body {
 
 /* Header */
 header {
-  background-color: rgba(30, 30, 30, 0.95);
+  background-color: rgba(17, 17, 17, 0.95);
   padding: 2rem 3rem;
   position: fixed;
   width: 100%;
@@ -112,7 +112,7 @@ header nav a:hover {
 
 .tagline {
   font-size: 2rem;
-  color: #aaa;
+  color: #999;
   margin-bottom: 2rem;
 }
 
@@ -132,11 +132,20 @@ header nav a:hover {
 .social-links a {
   font-size: 3rem;
   color: var(--dark-text);
-  transition: all 0.3s;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
 }
 
 .social-links a:hover {
+  background: var(--dark-hover);
   color: var(--dark-accent);
+  box-shadow: 0 0 20px var(--dark-accent);
   transform: translateY(-5px) scale(1.2);
 }
 
@@ -154,13 +163,13 @@ header nav a:hover {
   background: var(--accent-gradient);
   border-radius: 50%;
   overflow: hidden;
-  box-shadow: 0 0 30px rgba(74, 158, 255, 0.4);
+  box-shadow: 0 0 30px var(--dark-shadow);
   transition: transform 0.4s ease;
 }
 
 .profile-frame:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 45px rgba(74, 158, 255, 0.6);
+  box-shadow: 0 0 45px var(--dark-accent);
 }
 
 .profile-frame img {
@@ -191,16 +200,17 @@ header nav a:hover {
 }
 
 .skill-category {
-  background: #252525;
+  background: #1a1a1a;
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 6px 20px var(--dark-shadow);
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: all 0.3s;
 }
 
 .skill-category:hover {
+  background: var(--dark-hover);
   transform: translateY(-10px);
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 12px 35px var(--dark-accent);
 }
 
 .skill-category h3 {
@@ -221,26 +231,28 @@ header nav a:hover {
 .skill-icon {
   background: #333;
   padding: 1rem;
-  border-radius: 8px;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
 }
 
 .skill-icon:hover {
-  background: #444;
+  background: var(--dark-hover);
   transform: scale(1.2);
+  box-shadow: 0 0 15px var(--dark-accent);
 }
 
 .skill-icon i {
-  font-size: 3rem;
-  margin-bottom: 0.5rem;
+  font-size: 2rem;
+  color: var(--dark-text);
 }
 
 .skill-icon span {
-  font-size: 1rem;
-  font-weight: 600;
+  display: none;
 }
 
 /* Projects Section */
@@ -271,10 +283,10 @@ header nav a:hover {
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 8px 24px var(--dark-shadow);
-  transition: transform 0.4s ease, box-shadow 0.4s ease, border 0.4s ease;
-  cursor: pointer;
+  transition: all 0.4s ease;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 }
 
 .project-card img {
@@ -295,8 +307,6 @@ header nav a:hover {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  position: relative;
-  z-index: 2;
 }
 
 .project-content h3 {
@@ -319,7 +329,7 @@ header nav a:hover {
 }
 
 .tech-tags span {
-  background: rgba(74, 158, 255, 0.2);
+  background: rgba(255, 28, 28, 0.2);
   color: var(--dark-accent);
   padding: 0.3rem 0.8rem;
   border-radius: 50px;
@@ -327,14 +337,13 @@ header nav a:hover {
   font-weight: 600;
 }
 
-/* Modern overlay on hover */
 .project-overlay {
   position: absolute;
   bottom: -100%;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to top, rgba(18, 18, 18, 0.95), rgba(18, 18, 18, 0.6));
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.6));
   color: #fff;
   padding: 2rem;
   display: flex;
@@ -369,41 +378,45 @@ header nav a:hover {
   text-decoration: none;
   font-weight: bold;
   display: inline-block;
-  transition: background 0.3s, transform 0.3s;
+  transition: all 0.3s ease;
 }
 
 .project-overlay a:hover {
-  background: #3a8cff;
+  background: rgba(255, 28, 28, 0.3);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 15px var(--dark-accent);
   transform: translateY(-3px);
 }
 
-/* Glowing border effect */
-.project-card:hover {
-  border: 1px solid var(--dark-accent);
-  box-shadow: 0 0 30px rgba(74, 158, 255, 0.5);
-}
-
-/* Project Link (legacy if used) */
-.project-link {
+/* Buttons & Shared Glass Hover */
+button,
+.project-link,
+.resume-btn,
+.skill-icon,
+.social-links a {
   background: var(--dark-accent);
   color: #fff;
-  padding: 1rem;
-  text-align: center;
-  font-weight: bold;
+  border: none;
+  cursor: pointer;
   text-decoration: none;
-  font-size: 1.1rem;
-  border-radius: 0 0 12px 12px;
-  transition: all 0.3s;
+  transition: all 0.3s ease-in-out;
 }
 
-.project-link:hover {
-  background: #3a8cff;
-  transform: translateY(-2px);
+button:hover,
+.project-link:hover,
+.resume-btn:hover,
+.skill-icon:hover,
+.social-links a:hover {
+  background: var(--dark-hover);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 20px var(--dark-accent);
+  transform: translateY(-4px) scale(1.05);
+  color: var(--dark-accent);
 }
 
 /* Resume Section */
 .resume-section {
-  background: #181818;
+  background: #111;
   text-align: center;
   padding: 5rem 2rem;
 }
@@ -430,21 +443,21 @@ header nav a:hover {
   border-radius: 50px;
   font-weight: 700;
   font-size: 1.2rem;
-  transition: all 0.3s;
   text-decoration: none;
 }
 
 .resume-btn:hover {
-  background: #3a8cff;
+  background: var(--dark-hover);
+  box-shadow: 0 0 20px var(--dark-accent);
   transform: translateY(-4px) scale(1.05);
 }
 
 /* Footer */
 footer {
-  background: #0a0a0a;
+  background: #000;
   padding: 3rem 2rem;
   text-align: center;
-  color: #666;
+  color: #777;
   font-size: 1rem;
 }
 
@@ -460,4 +473,280 @@ footer {
   .hero-container {
     flex-direction: column;
   }
+}
+/* Make skill names visible under icons */
+.skill-icon {
+  background: rgba(255, 0, 0, 0.1);
+  padding: 1rem;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.3s;
+  color: var(--dark-accent);
+}
+
+.skill-icon i {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.skill-icon span {
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  color: var(--dark-accent);
+}
+
+/* Social icons - transparent background again */
+.smile-socials {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 3rem;
+  position: relative;
+}
+
+.smile-socials a {
+  font-size: 3rem;
+  color: var(--dark-accent);
+  background: none;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.smile-socials a:hover {
+  color: #fff;
+  background: rgba(255, 0, 0, 0.2);
+  backdrop-filter: blur(4px);
+  transform: translateY(-5px) scale(1.2);
+}
+
+/* Curved (smile) positioning */
+.smile-socials a:nth-child(1) { transform: translateY(30px) translateX(-100px) rotate(-20deg); }
+.smile-socials a:nth-child(2) { transform: translateY(60px) translateX(-30px) rotate(-10deg); }
+.smile-socials a:nth-child(3) { transform: translateY(60px) translateX(30px) rotate(10deg); }
+.smile-socials a:nth-child(4) { transform: translateY(30px) translateX(100px) rotate(20deg); }
+
+/* Animate cards on scroll */
+[data-aos] {
+  opacity: 0;
+  transform: translateY(50px);
+  transition-property: opacity, transform;
+}
+
+[data-aos].aos-animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Remove SMILE SOCIALS entirely */
+.smile-socials {
+  display: none;
+}
+
+/* Restore social icons to original transparent glass look */
+.social-links a {
+  font-size: 3rem;
+  color: var(--dark-text);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+  background: var(--dark-hover);
+  color: var(--dark-accent);
+  box-shadow: 0 0 20px var(--dark-accent);
+  transform: translateY(-5px) scale(1.2);
+}
+
+/* Improved Skills Section styling */
+
+.skill-category {
+  background: linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.03),
+      rgba(255, 255, 255, 0.01)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px var(--dark-shadow);
+  transition: all 0.3s;
+  backdrop-filter: blur(10px);
+}
+
+.skill-category:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 12px 35px var(--dark-accent);
+}
+
+.skill-category h3 {
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+  color: var(--dark-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+}
+
+/* Make skill icons visible and elegant */
+
+.skills-icons {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.skill-icon {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1rem;
+  border-radius: 10px;
+  width: 90px;
+  height: 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  color: var(--dark-accent);
+  backdrop-filter: blur(6px);
+}
+
+.skill-icon:hover {
+  background: rgba(255, 28, 28, 0.15);
+  transform: scale(1.15);
+  box-shadow: 0 0 15px var(--dark-accent);
+}
+
+.skill-icon i {
+  font-size: 2.2rem;
+  margin-bottom: 0.3rem;
+  color: var(--dark-text);
+}
+
+.skill-icon span {
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--dark-accent);
+  text-align: center;
+}
+
+/* ------------------------------- */
+/* Skills Grid & Card Layout       */
+/* ------------------------------- */
+
+.skills-section {
+  padding: 6rem 2rem;
+  background-color: var(--dark-card);
+  text-align: center;
+}
+
+.skills-section h2 {
+  font-size: 3.5rem;
+  color: var(--dark-accent);
+  margin-bottom: 3rem;
+}
+
+/* Skills grid uses flex instead of grid for even heights */
+.skills-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Skill cards equal height and properly aligned */
+.skill-category {
+  background: #1a1a1a;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px var(--dark-shadow);
+  transition: all 0.3s;
+  flex: 1 1 320px;
+  min-width: 280px;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* On hover, glow effect */
+.skill-category:hover {
+  background: var(--dark-hover);
+  transform: translateY(-10px);
+  box-shadow: 0 12px 35px var(--dark-accent);
+}
+
+/* Category heading */
+.skill-category h3 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: var(--dark-accent);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Skills icons layout inside each card */
+.skills-icons {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  gap: 1.2rem;
+  width: 100%;
+  justify-items: center;
+}
+
+/* Individual skill icon */
+.skill-icon {
+  background: #2a2a2a;
+  padding: 1rem;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90px;
+  height: 90px;
+  transition: all 0.3s;
+}
+
+/* Icon grows on hover */
+.skill-icon:hover {
+  background: var(--dark-hover);
+  transform: scale(1.15);
+  box-shadow: 0 0 15px var(--dark-accent);
+}
+
+/* Icon itself */
+.skill-icon i {
+  font-size: 1.8rem;
+  margin-bottom: 0.3rem;
+  color: var(--dark-text);
+}
+
+/* Skill name label */
+.skill-icon span {
+  font-size: 0.9rem;
+  color: var(--dark-accent);
+  font-weight: 600;
+  text-align: center;
 }
