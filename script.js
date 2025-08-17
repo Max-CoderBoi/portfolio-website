@@ -1,4 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
+  /* ===============================
+     Typing Effect in Hero Section
+  =============================== */
   const typedTextSpan = document.querySelector(".typed-text");
   const textArray = ["Akash Patil"];
   const typingDelay = 150;
@@ -29,41 +32,67 @@ document.addEventListener("DOMContentLoaded", () => {
 
   type();
 
-  // ✅ Smooth Scroll for navigation links
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        const headerOffset = 70; // adjust if header is fixed
-        const elementPosition = target.getBoundingClientRect().top + window.scrollY;
-        const offsetPosition = elementPosition - headerOffset;
+  /* ===============================
+     Extra Smooth Scroll for Nav Links
+  =============================== */
+  function smoothScrollTo(target, duration = 1200, offset = 70) {
+    const start = window.scrollY;
+    const elementPosition = target.getBoundingClientRect().top + window.scrollY;
+    const targetPosition = elementPosition - offset;
+    const distance = targetPosition - start;
+    let startTime = null;
 
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: "smooth"
-        });
+    function animation(currentTime) {
+      if (startTime === null) startTime = currentTime;
+      const timeElapsed = currentTime - startTime;
+
+      // Ease-in-out cubic function
+      const ease = (t, b, c, d) => {
+        t /= d / 2;
+        if (t < 1) return (c / 2) * t * t * t + b;
+        t -= 2;
+        return (c / 2) * (t * t * t + 2) + b;
+      };
+
+      const run = ease(timeElapsed, start, distance, duration);
+      window.scrollTo(0, run);
+
+      if (timeElapsed < duration) requestAnimationFrame(animation);
+    }
+
+    requestAnimationFrame(animation);
+  }
+
+  // Attach smooth scroll to all nav links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute("href"));
+      if (target) {
+        smoothScrollTo(target, 1200, 70); // 1200ms for smoother effect
       }
     });
   });
 });
 
-// ✅ Project modal open/close
-document.querySelectorAll('.project-card').forEach(card => {
-  card.addEventListener('click', () => {
+/* ===============================
+   Project Modal Open/Close
+=============================== */
+document.querySelectorAll(".project-card").forEach(card => {
+  card.addEventListener("click", () => {
     const modalId = card.dataset.modal;
-    document.getElementById(modalId).style.display = 'flex';
+    document.getElementById(modalId).style.display = "flex";
   });
 });
 
-document.querySelectorAll('.modal .close').forEach(btn => {
-  btn.addEventListener('click', () => {
-    btn.closest('.modal').style.display = 'none';
+document.querySelectorAll(".modal .close").forEach(btn => {
+  btn.addEventListener("click", () => {
+    btn.closest(".modal").style.display = "none";
   });
 });
 
-window.addEventListener('click', e => {
-  if (e.target.classList.contains('modal')) {
-    e.target.style.display = 'none';
+window.addEventListener("click", e => {
+  if (e.target.classList.contains("modal")) {
+    e.target.style.display = "none";
   }
 });
