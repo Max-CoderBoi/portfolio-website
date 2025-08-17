@@ -28,9 +28,27 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   type();
+
+  // ✅ Smooth Scroll for navigation links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        const headerOffset = 70; // adjust if header is fixed
+        const elementPosition = target.getBoundingClientRect().top + window.scrollY;
+        const offsetPosition = elementPosition - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+      }
+    });
+  });
 });
 
-
+// ✅ Project modal open/close
 document.querySelectorAll('.project-card').forEach(card => {
   card.addEventListener('click', () => {
     const modalId = card.dataset.modal;
