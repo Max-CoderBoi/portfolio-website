@@ -1,234 +1,806 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Akash Patil | Full-Stack Developer</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body class="dark-theme">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Akash Patil | Full-Stack Developer & GenAI Specialist</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  <header class="dark-header">
-    <nav class="right-aligned">
-      <ul >
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --secondary: #8b5cf6;
+      --accent: #ec4899;
+      --bg-dark: #0f172a;
+      --bg-card: #1e293b;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Animated Background */
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.15;
+    }
+
+    .bg-animation span {
+      position: absolute;
+      border-radius: 50%;
+      background: var(--gradient);
+      animation: float 20s infinite;
+    }
+
+    .bg-animation span:nth-child(1) { width: 300px; height: 300px; top: 10%; left: 10%; animation-delay: 0s; }
+    .bg-animation span:nth-child(2) { width: 200px; height: 200px; top: 60%; right: 10%; animation-delay: 5s; }
+    .bg-animation span:nth-child(3) { width: 250px; height: 250px; bottom: 10%; left: 30%; animation-delay: 10s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-50px) rotate(180deg); }
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 1rem 5%;
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    nav {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    nav a {
+      color: var(--text-primary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gradient);
+      transition: width 0.3s;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 8rem 5% 4rem;
+    }
+
+    .hero-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-text h1 {
+      font-size: 4rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .gradient-text {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-text .tagline {
+      font-size: 1.5rem;
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-text .bio {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      line-height: 1.8;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(99, 102, 241, 0.1);
+      border: 1px solid var(--primary);
+      color: var(--primary);
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .social-links a {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-primary);
+      font-size: 1.2rem;
+      transition: all 0.3s;
+    }
+
+    .social-links a:hover {
+      background: var(--gradient);
+      border-color: transparent;
+      transform: translateY(-5px);
+    }
+
+    .hero-image {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+
+    .profile-card {
+      position: relative;
+      width: 400px;
+      height: 400px;
+      border-radius: 30px;
+      background: var(--gradient);
+      padding: 8px;
+      animation: rotate 20s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .profile-card img {
+      width: 100%;
+      height: 100%;
+      border-radius: 25px;
+      object-fit: cover;
+    }
+
+    /* Skills Section */
+    .skills {
+      padding: 6rem 5%;
+      background: var(--bg-card);
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 3rem;
+    }
+
+    .skills-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .skill-category {
+      margin-bottom: 3rem;
+    }
+
+    .skill-category h3 {
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .skill-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skill-item {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .skill-item:hover {
+      background: rgba(99, 102, 241, 0.1);
+      border-color: var(--primary);
+      transform: translateY(-5px);
+    }
+
+    .skill-item i {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .skill-item span {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    /* Projects Section */
+    .projects {
+      padding: 6rem 5%;
+    }
+
+    .projects-grid {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3);
+    }
+
+    .project-image {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+
+    .project-card:hover .project-image {
+      transform: scale(1.1);
+    }
+
+    .project-content {
+      padding: 1.5rem;
+    }
+
+    .project-content h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+    }
+
+    .project-content p {
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .tech-tag {
+      background: rgba(99, 102, 241, 0.1);
+      color: var(--primary);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--primary);
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .project-link:hover {
+      gap: 1rem;
+    }
+
+    /* Contact Section */
+    .contact {
+      padding: 6rem 5%;
+      background: var(--bg-card);
+      text-align: center;
+    }
+
+    .contact-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .contact-content p {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary {
+      background: var(--gradient);
+      color: white;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-primary);
+      border: 2px solid var(--primary);
+    }
+
+    .btn-secondary:hover {
+      background: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    /* Footer */
+    footer {
+      padding: 2rem 5%;
+      text-align: center;
+      color: var(--text-secondary);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Responsive */
+    @media (max-width: 968px) {
+      .hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .hero-text h1 {
+        font-size: 3rem;
+      }
+
+      nav ul {
+        gap: 1.5rem;
+      }
+
+      .profile-card {
+        width: 300px;
+        height: 300px;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav ul {
+        display: none;
+      }
+
+      .hero-text h1 {
+        font-size: 2.5rem;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-animation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <header>
+    <nav>
+      <div class="logo">AP</div>
+      <ul>
         <li><a href="#home">Home</a></li>
         <li><a href="#skills">Skills</a></li>
         <li><a href="#projects">Projects</a></li>
-        <li><a href="#resume">Resume</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
   </header>
 
-  <section id="home" class="hero-section">
+  <section id="home" class="hero">
     <div class="hero-container">
       <div class="hero-text">
-        <h1>Hi, I'm <span class="typed-text"></span></h1>
-        <p class="tagline">Full-Stack Developer & DevOps Enthusiast</p>
-
-        <div class="social-links large-icons">
-          <a href="mailto:akashpatil.ap1610@gmail.com" target="_blank" title="Email">
-            <i class="fas fa-envelope"></i>
-          </a>
-          <a href="https://www.linkedin.com/in/akash-patil-544a62301" target="_blank" title="LinkedIn">
-            <i class="fab fa-linkedin"></i>
-          </a>
-          <a href="https://github.com/Max-CoderBoi" target="_blank" title="GitHub">
-            <i class="fab fa-github"></i>
-          </a>
-          <a href="https://leetcode.com/u/Akash_Patil_2005/" target="_blank" title="LeetCode">
-            <i class="fas fa-code"></i>
-          </a>
-        </div>
-
-        <p class="about">
-        "I'm a passionate full-stack web developer dedicated to building modern, high-performance web applications. With expertise in React, Node.js, and cloud technologies, I specialize in crafting elegant, scalable solutions that bring ideas to life on the web."
+        <div class="badge">🏆 SIH'25 Finalist | VJTI CE'27</div>
+        <h1>Hi, I'm <span class="gradient-text">Akash Patil</span></h1>
+        <p class="tagline">Full-Stack Developer | GenAI Specialist | Agentic AI Enthusiast</p>
+        <p class="bio">
+          Third-year Computer Engineering student at VJTI Mumbai specializing in full-stack development and generative AI. I build intelligent, scalable applications that leverage AI agents to enhance user experiences and automate complex workflows.
         </p>
+        <div class="social-links">
+          <a href="mailto:akashpatil.ap1610@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+          <a href="https://www.linkedin.com/in/akash-patil-544a62301" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+          <a href="https://github.com/Max-CoderBoi" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://leetcode.com/u/Akash_Patil_2005/" target="_blank" title="LeetCode"><i class="fas fa-code"></i></a>
+        </div>
       </div>
-
       <div class="hero-image">
-        <div class="profile-frame">
-          <img src="images/profile.jpg" alt="Akash Patil" />
+        <div class="profile-card">
+          <img src="/images/profile.jpg" alt="Akash Patil">
         </div>
       </div>
     </div>
   </section>
 
-  <section id="skills" class="skills-section">
-    <h2>My Skills</h2>
-    <div class="skills-grid">
+  <section id="skills" class="skills">
+    <h2 class="section-title">Technical <span class="gradient-text">Skills</span></h2>
+    <div class="skills-container">
       <div class="skill-category">
-        <h3><i class="fas fa-laptop-code"></i> Frontend</h3>
-        <div class="skills-icons">
-          <div class="skill-icon" title="HTML5">
-            <i class="fab fa-html5"></i><span>HTML5</span>
+        <h3><i class="fas fa-code"></i> Programming Languages</h3>
+        <div class="skill-grid">
+          <div class="skill-item">
+            <i class="fab fa-js"></i>
+            <span>JavaScript</span>
           </div>
-          <div class="skill-icon" title="CSS3">
-            <i class="fab fa-css3-alt"></i><span>CSS3</span>
+          <div class="skill-item">
+            <i class="fas fa-plus"></i>
+            <span>C++</span>
           </div>
-          <div class="skill-icon" title="JavaScript">
-            <i class="fab fa-js-square"></i><span>JavaScript</span>
+          <div class="skill-item">
+            <i class="fab fa-js"></i>
+            <span>TypeScript</span>
           </div>
-          <div class="skill-icon" title="React">
-            <i class="fab fa-react"></i><span>React</span>
-          </div>
-          <div class="skill-icon" title="Tailwind">
-            <i class="fas fa-wind"></i><span>Tailwind</span>
+          <div class="skill-item">
+            <i class="fab fa-python"></i>
+            <span>Python</span>
           </div>
         </div>
       </div>
-      
+
       <div class="skill-category">
-        <h3><i class="fas fa-server"></i> Backend</h3>
-        <div class="skills-icons">
-          <div class="skill-icon" title="Node.js">
-            <i class="fab fa-node-js"></i><span>Node.js</span>
+        <h3><i class="fas fa-layer-group"></i> Frameworks & Libraries</h3>
+        <div class="skill-grid">
+          <div class="skill-item">
+            <i class="fab fa-react"></i>
+            <span>Next.js</span>
           </div>
-          <div class="skill-icon" title="Express">
-            <i class="fas fa-server"></i><span>Express</span>
+          <div class="skill-item">
+            <i class="fab fa-react"></i>
+            <span>React.js</span>
           </div>
-          <div class="skill-icon" title="MongoDB">
-            <i class="fas fa-database"></i><span>MongoDB</span>
+          <div class="skill-item">
+            <i class="fab fa-node"></i>
+            <span>Node.js</span>
           </div>
-          <div class="skill-icon" title="SQL">
-            <i class="fas fa-database"></i><span>SQL</span>
+          <div class="skill-item">
+            <i class="fas fa-server"></i>
+            <span>Express.js</span>
           </div>
-          <div class="skill-icon" title="Redis">
-            <i class="fas fa-database"></i><span>Redis</span>
+          <div class="skill-item">
+            <i class="fas fa-wind"></i>
+            <span>Tailwind CSS</span>
           </div>
         </div>
       </div>
-      
+
       <div class="skill-category">
-        <h3><i class="fas fa-tools"></i> Tools </h3>
-        <div class="skills-icons">
-          <div class="skill-icon" title="Docker">
-            <i class="fab fa-docker"></i><span>Docker</span>
+        <h3><i class="fas fa-database"></i> Databases</h3>
+        <div class="skill-grid">
+          <div class="skill-item">
+            <i class="fas fa-leaf"></i>
+            <span>MongoDB</span>
           </div>
-          <div class="skill-icon" title="Ansible">
-            <i class="fas fa-cogs"></i><span>Ansible</span>
+          <div class="skill-item">
+            <i class="fas fa-database"></i>
+            <span>SQL</span>
           </div>
-          <div class="skill-icon" title="Terraform">
-            <i class="fas fa-code-branch"></i><span>Terraform</span>
+          <div class="skill-item">
+            <i class="fas fa-cube"></i>
+            <span>Redis</span>
           </div>
-          <div class="skill-icon" title="Git">
-            <i class="fab fa-git-alt"></i><span>Git</span>
+          <div class="skill-item">
+            <i class="fas fa-vector-square"></i>
+            <span>Vector DBs</span>
           </div>
-          <div class="skill-icon" title="Linux">
-            <i class="fab fa-linux"></i><span>Linux</span>
+        </div>
+      </div>
+
+      <div class="skill-category">
+        <h3><i class="fas fa-brain"></i> AI Tools & RAG Pipeline</h3>
+        <div class="skill-grid">
+          <div class="skill-item">
+            <i class="fas fa-link"></i>
+            <span>LangChain</span>
           </div>
-          <div class="skill-icon" title="Cloudinary">
-            <i class="fas fa-cloud"></i><span>Cloudinary</span>
+          <div class="skill-item">
+            <i class="fas fa-thumbtack"></i>
+            <span>Pinecone</span>
+          </div>
+          <div class="skill-item">
+            <i class="fas fa-robot"></i>
+            <span>Gemini AI</span>
+          </div>
+          <div class="skill-item">
+            <i class="fas fa-bolt"></i>
+            <span>Groq API</span>
+          </div>
+          <div class="skill-item">
+            <i class="fas fa-project-diagram"></i>
+            <span>RAG Pipeline</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-category">
+        <h3><i class="fas fa-tools"></i> Developer Tools</h3>
+        <div class="skill-grid">
+          <div class="skill-item">
+            <i class="fab fa-git-alt"></i>
+            <span>Git/GitHub</span>
+          </div>
+          <div class="skill-item">
+            <i class="fas fa-paper-plane"></i>
+            <span>Postman</span>
+          </div>
+          <div class="skill-item">
+            <i class="fas fa-code"></i>
+            <span>VS Code</span>
+          </div>
+          <div class="skill-item">
+            <i class="fab fa-linux"></i>
+            <span>Linux</span>
+          </div>
+          <div class="skill-item">
+            <i class="fas fa-flask"></i>
+            <span>Google Colab</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="projects" class="projects-section">
-    <h2>Featured Projects</h2>
+  <section id="projects" class="projects">
+    <h2 class="section-title">Featured <span class="gradient-text">Projects</span></h2>
     <div class="projects-grid">
-
-      <!-- Project 1 -->
       <div class="project-card">
-        <div class="project-image-container">
-          <img src="images/leetcode.jpg" alt="LeetCode Platform with AI Assistant" class="project-image" />
-          <div class="project-overlay">
-            <h4>LeetCode Platform with AI Assistant</h4>
-            <p>Full-stack web platform for solving coding problems with live code execution via Judge0 API.</p>
-            <a href="https://github.com/Max-CoderBoi/LeetCode" target="_blank" class="project-link">
-              View Project <i class="fas fa-arrow-right"></i>
-            </a>
-          </div>
-        </div>
+        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&h=400&fit=crop" alt="LeetCode Platform" class="project-image">
         <div class="project-content">
           <h3>LeetCode Platform with AI Assistant</h3>
-          <div class="tech-tags">
-            <span>HTML</span>
-            <span>CSS</span>
-            <span>JavaScript</span>
-            <span>React</span>
-            <span>Node.js</span>
-            <span>Express.js</span>
-            <span>MongoDB</span>
-            <span>Redis</span>
-            <span>Judge0</span>
-            <span>Gemini AI</span>
-            <span>Cloudinary</span>
+          <p>Full-stack coding platform with real-time code execution, AI-powered hints, and personalized learning assistance using Gemini AI.</p>
+          <div class="tech-stack">
+            <span class="tech-tag">React</span>
+            <span class="tech-tag">Node.js</span>
+            <span class="tech-tag">MongoDB</span>
+            <span class="tech-tag">Redis</span>
+            <span class="tech-tag">Judge0 API</span>
+            <span class="tech-tag">Gemini AI</span>
           </div>
+          <a href="https://github.com/Max-CoderBoi/LeetCode" target="_blank" class="project-link">
+            View Project <i class="fas fa-arrow-right"></i>
+          </a>
         </div>
       </div>
 
-      <!-- Project 2 -->
       <div class="project-card">
-        <div class="project-image-container">
-          <img src="images/employee.jpg" alt="Employee Task Management System" class="project-image" />
-          <div class="project-overlay">
-            <h4>Employee Task Management System</h4>
-            <p>Built a modern web application to manage employee tasks with dynamic status tracking.</p>
-            <a href="https://employee-task-management-nine.vercel.app" target="_blank" class="project-link">
-              View Project <i class="fas fa-arrow-right"></i>
-            </a>
+        <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&h=400&fit=crop" alt="Jal Shakti" class="project-image">
+        <div class="project-content">
+          <h3>Jal Shakti - Groundwater Monitoring</h3>
+          <p>National-scale platform for groundwater monitoring with ML forecasting and Grok LLM-powered sustainability recommendations.</p>
+          <div class="tech-stack">
+            <span class="tech-tag">Next.js</span>
+            <span class="tech-tag">Flutter</span>
+            <span class="tech-tag">MongoDB</span>
+            <span class="tech-tag">Machine Learning</span>
+            <span class="tech-tag">Grok LLM</span>
           </div>
+          <a href="https://github.com/sahilchavan94/sih-2025" target="_blank" class="project-link">
+            View Project <i class="fas fa-arrow-right"></i>
+          </a>
         </div>
+      </div>
+
+      <div class="project-card">
+        <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=600&h=400&fit=crop" alt="Study.io" class="project-image">
+        <div class="project-content">
+          <h3>Study.io - AI Study Assistant</h3>
+          <p>AI-powered study assistant with PDF upload, RAG pipeline for accurate responses, and citation-backed answers using LangChain.</p>
+          <div class="tech-stack">
+            <span class="tech-tag">Next.js</span>
+            <span class="tech-tag">Gemini AI</span>
+            <span class="tech-tag">Pinecone</span>
+            <span class="tech-tag">LangChain</span>
+            <span class="tech-tag">RAG</span>
+          </div>
+          <a href="https://github.com/Max-CoderBoi/Study.io" target="_blank" class="project-link">
+            View Project <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=400&fit=crop" alt="Employee Task Management" class="project-image">
         <div class="project-content">
           <h3>Employee Task Management System</h3>
-          <div class="tech-tags">
-            <span>HTML</span>
-            <span>CSS</span>
-            <span>Tailwind CSS</span>
-            <span>JavaScript</span>
-            <span>Node.js</span>
-            <span>Express.js</span>
-            <span>MongoDB</span>
+          <p>Modern web application for managing employee tasks with dynamic status tracking, real-time updates, and role-based access.</p>
+          <div class="tech-stack">
+            <span class="tech-tag">React</span>
+            <span class="tech-tag">Tailwind CSS</span>
+            <span class="tech-tag">Node.js</span>
+            <span class="tech-tag">MongoDB</span>
           </div>
+          <a href="https://employee-task-management-nine.vercel.app" target="_blank" class="project-link">
+            View Project <i class="fas fa-arrow-right"></i>
+          </a>
         </div>
       </div>
 
-      <!-- Project 3 -->
       <div class="project-card">
-        <div class="project-image-container">
-          <img src="images/blog.jpg" alt="Blog Platform" class="project-image" />
-          <div class="project-overlay">
-            <h4>Blog Platform</h4>
-            <p>Developed a blogging platform enabling users to write, edit, and publish posts securely.</p>
-            <a href="https://blog-app-pearl-rho.vercel.app" target="_blank" class="project-link">
-              View Project <i class="fas fa-arrow-right"></i>
-            </a>
-          </div>
-        </div>
+        <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=600&h=400&fit=crop" alt="Blog Platform" class="project-image">
         <div class="project-content">
           <h3>Blog Platform</h3>
-          <div class="tech-tags">
-            <span>HTML</span>
-            <span>CSS</span>
-            <span>JavaScript</span>
-            <span>React</span>
-            <span>Tailwind CSS</span>
-            <span>Appwrite</span>
+          <p>Comprehensive blogging platform enabling users to write, edit, and publish posts with secure authentication and rich text editing.</p>
+          <div class="tech-stack">
+            <span class="tech-tag">React</span>
+            <span class="tech-tag">Tailwind CSS</span>
+            <span class="tech-tag">Appwrite</span>
           </div>
+          <a href="https://blog-app-pearl-rho.vercel.app" target="_blank" class="project-link">
+            View Project <i class="fas fa-arrow-right"></i>
+          </a>
         </div>
       </div>
-
     </div>
   </section>
 
-  <section id="resume" class="resume-section">
-    <h2>Let's Connect</h2>
-    <p class="email-link">
-      <i class="fas fa-envelope"></i> akashpatil.ap1610@gmail.com
-    </p>
-    <a href="akash_resume.pdf" download class="resume-btn">
-      <i class="fas fa-download"></i> Download Resume
-    </a>
+  <section id="contact" class="contact">
+    <div class="contact-content">
+      <h2 class="section-title">Let's Build <span class="gradient-text">Something Amazing</span></h2>
+      <p>Always looking to collaborate on innovative GenAI projects and push the boundaries of what agentic AI can do.</p>
+      <div class="cta-buttons">
+        <a href="mailto:akashpatil.ap1610@gmail.com" class="btn btn-primary">
+          <i class="fas fa-envelope"></i> Get in Touch
+        </a>
+        <a href="akash_resume.pdf" download class="btn btn-secondary">
+          <i class="fas fa-download"></i> Download Resume
+        </a>
+      </div>
+    </div>
   </section>
 
   <footer>
-    <div class="footer-content">
-      <p>© 2025 Akash Patil</p>
-    </div>
+    <p>&copy; 2025 Akash Patil. All rights reserved.</p>
   </footer>
 
-  <script src="script.js"></script>
+  <script>
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.skill-item, .project-card').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'all 0.6s ease';
+      observer.observe(el);
+    });
+  </script>
 </body>
 </html>
