@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,7 +34,7 @@
       overflow-x: hidden;
     }
 
-    /* Animated Background */
+    /* Enhanced 3D Background */
     .bg-animation {
       position: fixed;
       top: 0;
@@ -41,23 +42,95 @@
       width: 100%;
       height: 100%;
       z-index: -1;
-      opacity: 0.15;
+      perspective: 1000px;
+    }
+
+    .bg-animation::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 40% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+      animation: bgPulse 15s ease-in-out infinite;
+    }
+
+    @keyframes bgPulse {
+      0%, 100% { opacity: 0.5; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.1); }
     }
 
     .bg-animation span {
       position: absolute;
       border-radius: 50%;
       background: var(--gradient);
-      animation: float 20s infinite;
+      animation: float3d 20s infinite ease-in-out;
+      transform-style: preserve-3d;
     }
 
-    .bg-animation span:nth-child(1) { width: 300px; height: 300px; top: 10%; left: 10%; animation-delay: 0s; }
-    .bg-animation span:nth-child(2) { width: 200px; height: 200px; top: 60%; right: 10%; animation-delay: 5s; }
-    .bg-animation span:nth-child(3) { width: 250px; height: 250px; bottom: 10%; left: 30%; animation-delay: 10s; }
+    .bg-animation span:nth-child(1) { 
+      width: 400px; 
+      height: 400px; 
+      top: 10%; 
+      left: 10%; 
+      animation-delay: 0s;
+      filter: blur(80px);
+    }
+    .bg-animation span:nth-child(2) { 
+      width: 300px; 
+      height: 300px; 
+      top: 60%; 
+      right: 10%; 
+      animation-delay: 5s;
+      filter: blur(70px);
+      background: var(--gradient-2);
+    }
+    .bg-animation span:nth-child(3) { 
+      width: 350px; 
+      height: 350px; 
+      bottom: 10%; 
+      left: 40%; 
+      animation-delay: 10s;
+      filter: blur(75px);
+    }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-50px) rotate(180deg); }
+    @keyframes float3d {
+      0%, 100% { 
+        transform: translateY(0) translateZ(0) rotateZ(0deg);
+        opacity: 0.3;
+      }
+      25% { 
+        transform: translateY(-80px) translateZ(100px) rotateZ(90deg);
+        opacity: 0.5;
+      }
+      50% { 
+        transform: translateY(-50px) translateZ(50px) rotateZ(180deg);
+        opacity: 0.4;
+      }
+      75% { 
+        transform: translateY(-120px) translateZ(150px) rotateZ(270deg);
+        opacity: 0.6;
+      }
+    }
+
+    /* Grid pattern overlay */
+    .bg-animation::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      animation: gridMove 20s linear infinite;
+    }
+
+    @keyframes gridMove {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(50px); }
     }
 
     /* Header */
@@ -174,24 +247,6 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      position: relative;
-      display: inline-block;
-    }
-
-    .gradient-text::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 100%;
-      height: 3px;
-      background: var(--gradient);
-      transform: scaleX(0);
-      transition: transform 0.6s ease;
-    }
-
-    .hero-text h1:hover .gradient-text::after {
-      transform: scaleX(1);
     }
 
     .badge {
@@ -205,13 +260,6 @@
       font-weight: 600;
       margin-bottom: 2rem;
       animation: glow-pulse 2s ease-in-out infinite;
-      transition: all 0.3s;
-    }
-
-    .badge:hover {
-      background: rgba(99, 102, 241, 0.2);
-      transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
     }
 
     @keyframes glow-pulse {
@@ -236,35 +284,14 @@
       justify-content: center;
       color: var(--text-primary);
       font-size: 1.2rem;
-      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .social-links a::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      border-radius: 50%;
-      background: var(--gradient);
-      transform: translate(-50%, -50%);
-      transition: width 0.4s, height 0.4s;
-      z-index: -1;
-    }
-
-    .social-links a:hover::before {
-      width: 100%;
-      height: 100%;
+      transition: all 0.4s ease;
     }
 
     .social-links a:hover {
+      background: var(--gradient);
       border-color: transparent;
-      transform: translateY(-8px) scale(1.2) rotate(5deg);
+      transform: translateY(-5px) scale(1.1);
       box-shadow: 0 10px 30px rgba(99, 102, 241, 0.5);
-      color: white;
     }
 
     .hero-image {
@@ -285,25 +312,6 @@
       }
     }
 
-    .hero-image::before {
-      content: '';
-      position: absolute;
-      top: -20px;
-      right: -20px;
-      width: 200px;
-      height: 200px;
-      background: var(--gradient);
-      border-radius: 50%;
-      filter: blur(60px);
-      opacity: 0.3;
-      animation: pulse 4s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 0.3; }
-      50% { transform: scale(1.2); opacity: 0.5; }
-    }
-
     .profile-card {
       position: relative;
       width: 400px;
@@ -313,17 +321,11 @@
       padding: 8px;
       animation: float-profile 6s ease-in-out infinite;
       box-shadow: 0 20px 60px rgba(99, 102, 241, 0.4);
-      transition: all 0.5s ease;
     }
 
     @keyframes float-profile {
-      0%, 100% { transform: translateY(0) scale(1); }
-      50% { transform: translateY(-20px) scale(1.05); }
-    }
-
-    .profile-card:hover {
-      box-shadow: 0 30px 80px rgba(99, 102, 241, 0.6);
-      transform: scale(1.1) !important;
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
     }
 
     .profile-card img {
@@ -331,43 +333,22 @@
       height: 100%;
       border-radius: 50%;
       object-fit: cover;
-      transition: all 0.5s ease;
     }
 
-    .profile-card:hover img {
-      transform: scale(1.1);
-      filter: brightness(1.1);
-    }
-
-    /* Skills Section */
+    /* Enhanced Skills Section with Scrolling Animation */
     .skills {
       padding: 6rem 5%;
-      background: var(--bg-card);
+      background: rgba(30, 41, 59, 0.5);
+      backdrop-filter: blur(10px);
       position: relative;
       overflow: hidden;
-    }
-
-    .skills::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -50%;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle, rgba(99, 102, 241, 0.1), transparent);
-      animation: rotate-slow 30s linear infinite;
-    }
-
-    @keyframes rotate-slow {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
     }
 
     .section-title {
       text-align: center;
       font-size: 3rem;
       font-weight: 800;
-      margin-bottom: 3rem;
+      margin-bottom: 4rem;
       position: relative;
       display: inline-block;
       width: 100%;
@@ -383,119 +364,95 @@
       height: 4px;
       background: var(--gradient);
       border-radius: 2px;
-      animation: expand-line 1s ease-out;
     }
 
-    @keyframes expand-line {
-      from { width: 0; }
-      to { width: 100px; }
-    }
-
-    .skills-container {
+    .tech-stack-container {
       max-width: 1400px;
       margin: 0 auto;
       position: relative;
-      z-index: 1;
     }
 
-    .skill-category {
-      margin-bottom: 3rem;
-      animation: fadeInUp 0.8s ease-out both;
+    .scroll-wrapper {
+      overflow: hidden;
+      padding: 2rem 0;
+      mask-image: linear-gradient(
+        to right,
+        transparent,
+        black 10%,
+        black 90%,
+        transparent
+      );
+      -webkit-mask-image: linear-gradient(
+        to right,
+        transparent,
+        black 10%,
+        black 90%,
+        transparent
+      );
     }
 
-    .skill-category:nth-child(1) { animation-delay: 0.1s; }
-    .skill-category:nth-child(2) { animation-delay: 0.2s; }
-    .skill-category:nth-child(3) { animation-delay: 0.3s; }
-    .skill-category:nth-child(4) { animation-delay: 0.4s; }
-    .skill-category:nth-child(5) { animation-delay: 0.5s; }
-
-    .skill-category h3 {
-      font-size: 1.5rem;
-      color: var(--primary);
-      margin-bottom: 1.5rem;
+    .scroll-content {
       display: flex;
+      gap: 3rem;
+      animation: scroll-left 30s linear infinite;
+      width: fit-content;
+    }
+
+    .scroll-content.reverse {
+      animation: scroll-right 30s linear infinite;
+    }
+
+    @keyframes scroll-left {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    @keyframes scroll-right {
+      0% { transform: translateX(-50%); }
+      100% { transform: translateX(0); }
+    }
+
+    .tech-item {
+      display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 0.5rem;
-    }
-
-    .skill-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .skill-item {
+      gap: 1rem;
+      min-width: 120px;
+      padding: 1.5rem;
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 15px;
-      padding: 1.5rem;
-      text-align: center;
-      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      transition: all 0.4s ease;
       cursor: pointer;
-      position: relative;
-      overflow: hidden;
     }
 
-    .skill-item::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(99, 102, 241, 0.3), transparent);
-      transform: translate(-50%, -50%);
-      transition: width 0.6s ease, height 0.6s ease;
-    }
-
-    .skill-item:hover::before {
-      width: 300px;
-      height: 300px;
-    }
-
-    .skill-item:hover {
+    .tech-item:hover {
       background: rgba(99, 102, 241, 0.15);
       border-color: var(--primary);
       transform: translateY(-10px) scale(1.05);
       box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4);
     }
 
-    .skill-item i {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      position: relative;
-      z-index: 1;
+    .tech-item img {
+      width: 65px;
+      height: 65px;
+      object-fit: contain;
       transition: all 0.4s ease;
     }
 
-    .skill-item:hover i {
-      animation: rotate-icon 0.8s ease-in-out;
-      transform: scale(1.2);
+    .tech-item:hover img {
+      transform: scale(1.2) rotate(5deg);
     }
 
-    @keyframes rotate-icon {
-      0% { transform: rotate(0deg) scale(1); }
-      50% { transform: rotate(180deg) scale(1.3); }
-      100% { transform: rotate(360deg) scale(1.2); }
-    }
-
-    .skill-item span {
-      display: block;
+    .tech-item span {
       font-size: 0.95rem;
       font-weight: 500;
-      position: relative;
-      z-index: 1;
-      transition: all 0.3s ease;
+      color: var(--text-primary);
+      text-align: center;
     }
 
-    .skill-item:hover span {
-      color: var(--primary);
-      transform: translateY(-3px);
+    .scroll-row {
+      margin-bottom: 2rem;
     }
 
     /* Projects Section */
@@ -516,30 +473,12 @@
       border-radius: 20px;
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.1);
-      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      transition: all 0.4s ease;
       cursor: pointer;
-      position: relative;
-    }
-
-    .project-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      z-index: 0;
-    }
-
-    .project-card:hover::before {
-      opacity: 1;
     }
 
     .project-card:hover {
-      transform: translateY(-15px) scale(1.02);
+      transform: translateY(-15px);
       box-shadow: 0 25px 50px rgba(99, 102, 241, 0.4);
       border-color: var(--primary);
     }
@@ -548,26 +487,20 @@
       width: 100%;
       height: 220px;
       object-fit: cover;
-      transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-      position: relative;
-      z-index: 1;
+      transition: all 0.6s ease;
     }
 
     .project-card:hover .project-image {
-      transform: scale(1.15) rotate(2deg);
-      filter: brightness(0.8);
+      transform: scale(1.1);
     }
 
     .project-content {
       padding: 1.5rem;
-      position: relative;
-      z-index: 1;
     }
 
     .project-content h3 {
       font-size: 1.5rem;
       margin-bottom: 0.5rem;
-      color: var(--text-primary);
     }
 
     .project-content p {
@@ -591,15 +524,11 @@
       font-size: 0.85rem;
       font-weight: 500;
       transition: all 0.3s ease;
-      cursor: pointer;
-      border: 1px solid transparent;
     }
 
     .tech-tag:hover {
       background: rgba(99, 102, 241, 0.2);
-      border-color: var(--primary);
-      transform: translateY(-2px) scale(1.05);
-      box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
+      transform: translateY(-2px);
     }
 
     .project-link {
@@ -610,33 +539,17 @@
       font-weight: 600;
       text-decoration: none;
       transition: all 0.3s ease;
-      position: relative;
-    }
-
-    .project-link::after {
-      content: '';
-      position: absolute;
-      bottom: -3px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--gradient);
-      transition: width 0.3s ease;
-    }
-
-    .project-link:hover::after {
-      width: 100%;
     }
 
     .project-link:hover {
       gap: 1rem;
-      transform: translateX(5px);
     }
 
     /* Contact Section */
     .contact {
       padding: 6rem 5%;
-      background: var(--bg-card);
+      background: rgba(30, 41, 59, 0.5);
+      backdrop-filter: blur(10px);
       text-align: center;
     }
 
@@ -663,30 +576,10 @@
       border-radius: 50px;
       font-weight: 600;
       text-decoration: none;
-      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      transition: all 0.4s ease;
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .btn::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.2);
-      transform: translate(-50%, -50%);
-      transition: width 0.6s, height 0.6s;
-    }
-
-    .btn:hover::before {
-      width: 300px;
-      height: 300px;
     }
 
     .btn-primary {
@@ -709,7 +602,6 @@
     .btn-secondary:hover {
       background: var(--primary);
       transform: translateY(-5px) scale(1.05);
-      box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4);
     }
 
     /* Footer */
@@ -729,10 +621,6 @@
 
       .hero-text h1 {
         font-size: 3rem;
-      }
-
-      nav ul {
-        gap: 1.5rem;
       }
 
       .profile-card {
@@ -804,126 +692,175 @@
   </section>
 
   <section id="skills" class="skills">
-    <h2 class="section-title">Technical <span class="gradient-text">Skills</span></h2>
-    <div class="skills-container">
-      <div class="skill-category">
-        <h3><i class="fas fa-code"></i> Programming Languages</h3>
-        <div class="skill-grid">
-          <div class="skill-item">
-            <i class="fab fa-js-square"></i>
-            <span>JavaScript</span>
-          </div>
-          <div class="skill-item">
-            <i class="fab fa-cuttlefish"></i>
-            <span>C++</span>
-          </div>
-          <div class="skill-item">
-            <i class="fab fa-js-square"></i>
-            <span>TypeScript</span>
-          </div>
-          <div class="skill-item">
-            <i class="fab fa-python"></i>
-            <span>Python</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="skill-category">
-        <h3><i class="fas fa-layer-group"></i> Frameworks & Libraries</h3>
-        <div class="skill-grid">
-          <div class="skill-item">
-            <i class="fab fa-react"></i>
-            <span>Next.js</span>
-          </div>
-          <div class="skill-item">
-            <i class="fab fa-react"></i>
-            <span>React.js</span>
-          </div>
-          <div class="skill-item">
-            <i class="fab fa-node"></i>
-            <span>Node.js</span>
-          </div>
-          <div class="skill-item">
-            <i class="fas fa-server"></i>
-            <span>Express.js</span>
-          </div>
-          <div class="skill-item">
-            <i class="fas fa-wind"></i>
-            <span>Tailwind CSS</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="skill-category">
-        <h3><i class="fas fa-database"></i> Databases</h3>
-        <div class="skill-grid">
-          <div class="skill-item">
-            <i class="fas fa-database"></i>
-            <span>MongoDB</span>
-          </div>
-          <div class="skill-item">
-            <i class="fas fa-database"></i>
-            <span>SQL</span>
-          </div>
-          <div class="skill-item">
-            <i class="fas fa-bolt"></i>
-            <span>Redis</span>
-          </div>
-          <div class="skill-item">
-            <i class="fas fa-project-diagram"></i>
-            <span>Vector DBs</span>
+    <h2 class="section-title">Tech <span class="gradient-text">Stack</span></h2>
+    <div class="tech-stack-container">
+      <!-- Row 1: Left to Right -->
+      <div class="scroll-row">
+        <div class="scroll-wrapper">
+          <div class="scroll-content">
+            <div class="tech-item">
+              <img src="https://techstack-generator.vercel.app/js-icon.svg" alt="JavaScript">
+              <span>JavaScript</span>
+            </div>
+            <div class="tech-item">
+              <img src="https://techstack-generator.vercel.app/ts-icon.svg" alt="TypeScript">
+              <span>TypeScript</span>
+            </div>
+            <div class="tech-item">
+              <img src="https://techstack-generator.vercel.app/cpp-icon.svg" alt="C++">
+              <span>C++</span>
+            </div>
+            <div class="tech-item">
+              <img src="https://techstack-generator.vercel.app/python-icon.svg" alt="Python">
+              <span>Python</span>
+            </div>
+            <div class="tech-item">
+              <img src="https://techstack-generator.vercel.app/react-icon.svg" alt="React">
+              <span>React.js</span>
+            </div>
+            <div class="tech-item">
+              <img src="https://skillicons.dev/icons?i=nextjs" alt="Next.js">
+              <span>Next.js</span>
+            </div>
+            <!-- Duplicate for seamless loop -->
+            <div class="tech-item">
+              <img src="https://techstack-generator.vercel.app/js-icon.svg" alt="JavaScript">
+              <span>JavaScript</span>
+            </div>
+            <div class="tech-item">
+              <img src="https://techstack-generator.vercel.app/ts-icon.svg" alt="TypeScript">
+              <span>TypeScript</span>
+            </div>
+            <div class="tech-item">
+              <img src="https://techstack-generator.vercel.app/cpp-icon.svg" alt="C++">
+              <span>C++</span>
+            </div>
+            <div class="tech-item">
+              <img src="https://techstack-generator.vercel.app/python-icon.svg" alt="Python">
+              <span>Python</span>
+            </div>
+            <div class="tech-item">
+              <img src="https://techstack-generator.vercel.app/react-icon.svg" alt="React">
+              <span>React.js</span>
+            </div>
+            <div class="tech-item">
+              <img src="https://skillicons.dev/icons?i=nextjs" alt="Next.js">
+              <span>Next.js</span>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="skill-category">
-        <h3><i class="fas fa-brain"></i> AI Tools & RAG Pipeline</h3>
-        <div class="skill-grid">
-          <div class="skill-item">
-            <i class="fas fa-sitemap"></i>
-            <span>LangChain</span>
-          </div>
-          <div class="skill-item">
-            <i class="fas fa-map-pin"></i>
-            <span>Pinecone</span>
-          </div>
-          <div class="skill-item">
-            <i class="fas fa-brain"></i>
-            <span>Gemini AI</span>
-          </div>
-          <div class="skill-item">
-            <i class="fas fa-rocket"></i>
-            <span>Groq API</span>
-          </div>
-          <div class="skill-item">
-            <i class="fas fa-network-wired"></i>
-            <span>RAG Pipeline</span>
+      <!-- Row 2: Right to Left -->
+      <div class="scroll-row">
+        <div class="scroll-wrapper">
+          <div class="scroll-content reverse">
+            <div class="tech-item">
+              <img src="https://skillicons.dev/icons?i=nodejs" alt="Node.js">
+              <span>Node.js</span>
+            </div>
+            <div class="tech-item">
+              <img src="https://skillicons.dev/icons?i=express" alt="Express">
+              <span>Express.js</span>
+            </div>
+            <div class="tech-item">
+              <img src="https://skillicons.dev/icons?i=mongodb" alt="MongoDB">
+              <span>MongoDB</span>
+            </div>
+            <div class="tech-item">
+              <img src="https://techstack-generator.vercel.app/mysql-icon.svg" alt="SQL">
+              <span>SQL</span>
+            </div>
+            <div class="tech-item">
+              <img src="https://skillicons.dev/icons?i=redis" alt="Redis">
+              <span>Redis</span>
+            </div>
+            <div class="tech-item">
+              <img src="https://skillicons.dev/icons?i=tailwind" alt="Tailwind">
+              <span>Tailwind CSS</span>
+            </div>
+            <!-- Duplicate for seamless loop -->
+            <div class="tech-item">
+              <img src="https://skillicons.dev/icons?i=nodejs" alt="Node.js">
+              <span>Node.js</span>
+            </div>
+            <div class="tech-item">
+              <img src="https://skillicons.dev/icons?i=express" alt="Express">
+              <span>Express.js</span>
+            </div>
+            <div class="tech-item">
+              <img src="https://skillicons.dev/icons?i=mongodb" alt="MongoDB">
+              <span>MongoDB</span>
+            </div>
+            <div class="tech-item">
+              <img src="https://techstack-generator.vercel.app/mysql-icon.svg" alt="SQL">
+              <span>SQL</span>
+            </div>
+            <div class="tech-item">
+              <img src="https://skillicons.dev/icons?i=redis" alt="Redis">
+              <span>Redis</span>
+            </div>
+            <div class="tech-item">
+              <img src="https://skillicons.dev/icons?i=tailwind" alt="Tailwind">
+              <span>Tailwind CSS</span>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="skill-category">
-        <h3><i class="fas fa-tools"></i> Developer Tools</h3>
-        <div class="skill-grid">
-          <div class="skill-item">
-            <i class="fab fa-git-alt"></i>
-            <span>Git/GitHub</span>
-          </div>
-          <div class="skill-item">
-            <i class="fas fa-cube"></i>
-            <span>Postman</span>
-          </div>
-          <div class="skill-item">
-            <i class="fas fa-code"></i>
-            <span>VS Code</span>
-          </div>
-          <div class="skill-item">
-            <i class="fab fa-linux"></i>
-            <span>Linux</span>
-          </div>
-          <div class="skill-item">
-            <i class="fas fa-vial"></i>
-            <span>Google Colab</span>
+      <!-- Row 3: Left to Right -->
+      <div class="scroll-row">
+        <div class="scroll-wrapper">
+          <div class="scroll-content">
+            <div class="tech-item">
+              <img src="https://skillicons.dev/icons?i=docker" alt="Docker">
+              <span>Docker</span>
+            </div>
+            <div class="tech-item">
+              <img src="https://skillicons.dev/icons?i=git" alt="Git">
+              <span>Git</span>
+            </div>
+            <div class="tech-item">
+              <img src="https://skillicons.dev/icons?i=postman" alt="Postman">
+              <span>Postman</span>
+            </div>
+            <div class="tech-item">
+              <img src="https://avatars.githubusercontent.com/u/126733545?s=200&v=4" alt="LangChain">
+              <span>LangChain</span>
+            </div>
+            <div class="tech-item">
+              <img src="https://skillicons.dev/icons?i=linux" alt="Linux">
+              <span>Linux</span>
+            </div>
+            <div class="tech-item">
+              <img src="https://skillicons.dev/icons?i=vscode" alt="VS Code">
+              <span>VS Code</span>
+            </div>
+            <!-- Duplicate for seamless loop -->
+            <div class="tech-item">
+              <img src="https://skillicons.dev/icons?i=docker" alt="Docker">
+              <span>Docker</span>
+            </div>
+            <div class="tech-item">
+              <img src="https://skillicons.dev/icons?i=git" alt="Git">
+              <span>Git</span>
+            </div>
+            <div class="tech-item">
+              <img src="https://skillicons.dev/icons?i=postman" alt="Postman">
+              <span>Postman</span>
+            </div>
+            <div class="tech-item">
+              <img src="https://avatars.githubusercontent.com/u/126733545?s=200&v=4" alt="LangChain">
+              <span>LangChain</span>
+            </div>
+            <div class="tech-item">
+              <img src="https://skillicons.dev/icons?i=linux" alt="Linux">
+              <span>Linux</span>
+            </div>
+            <div class="tech-item">
+              <img src="https://skillicons.dev/icons?i=vscode" alt="VS Code">
+              <span>VS Code</span>
+            </div>
           </div>
         </div>
       </div>
