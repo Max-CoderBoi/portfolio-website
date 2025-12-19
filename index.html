@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Akash Patil | Full-Stack Developer & GenAI Specialist</title>
+  <title>Akash Patil | Full-Stack Developer & GenAI</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     * {
@@ -14,16 +13,14 @@
     }
 
     :root {
-      --primary: #6366f1;
-      --primary-dark: #4f46e5;
-      --secondary: #8b5cf6;
-      --accent: #ec4899;
-      --bg-dark: #0f172a;
-      --bg-card: #1e293b;
-      --text-primary: #f1f5f9;
-      --text-secondary: #94a3b8;
+      --primary: #00d4ff;
+      --secondary: #7b2cbf;
+      --accent: #ff006e;
+      --bg-dark: #000000;
+      --bg-card: #0a0a0a;
+      --text-primary: #ffffff;
+      --text-secondary: #a0a0a0;
       --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
     }
 
     body {
@@ -34,103 +31,14 @@
       overflow-x: hidden;
     }
 
-    /* Enhanced 3D Background */
-    .bg-animation {
+    /* 3D Space Background */
+    #space-canvas {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       z-index: -1;
-      perspective: 1000px;
-    }
-
-    .bg-animation::before {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: 
-        radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 40% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
-      animation: bgPulse 15s ease-in-out infinite;
-    }
-
-    @keyframes bgPulse {
-      0%, 100% { opacity: 0.5; transform: scale(1); }
-      50% { opacity: 1; transform: scale(1.1); }
-    }
-
-    .bg-animation span {
-      position: absolute;
-      border-radius: 50%;
-      background: var(--gradient);
-      animation: float3d 20s infinite ease-in-out;
-      transform-style: preserve-3d;
-    }
-
-    .bg-animation span:nth-child(1) { 
-      width: 400px; 
-      height: 400px; 
-      top: 10%; 
-      left: 10%; 
-      animation-delay: 0s;
-      filter: blur(80px);
-    }
-    .bg-animation span:nth-child(2) { 
-      width: 300px; 
-      height: 300px; 
-      top: 60%; 
-      right: 10%; 
-      animation-delay: 5s;
-      filter: blur(70px);
-      background: var(--gradient-2);
-    }
-    .bg-animation span:nth-child(3) { 
-      width: 350px; 
-      height: 350px; 
-      bottom: 10%; 
-      left: 40%; 
-      animation-delay: 10s;
-      filter: blur(75px);
-    }
-
-    @keyframes float3d {
-      0%, 100% { 
-        transform: translateY(0) translateZ(0) rotateZ(0deg);
-        opacity: 0.3;
-      }
-      25% { 
-        transform: translateY(-80px) translateZ(100px) rotateZ(90deg);
-        opacity: 0.5;
-      }
-      50% { 
-        transform: translateY(-50px) translateZ(50px) rotateZ(180deg);
-        opacity: 0.4;
-      }
-      75% { 
-        transform: translateY(-120px) translateZ(150px) rotateZ(270deg);
-        opacity: 0.6;
-      }
-    }
-
-    /* Grid pattern overlay */
-    .bg-animation::after {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background-image: 
-        linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
-      background-size: 50px 50px;
-      animation: gridMove 20s linear infinite;
-    }
-
-    @keyframes gridMove {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(50px); }
     }
 
     /* Header */
@@ -138,11 +46,11 @@
       position: fixed;
       top: 0;
       width: 100%;
-      background: rgba(15, 23, 42, 0.8);
-      backdrop-filter: blur(10px);
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(20px);
       padding: 1rem 5%;
       z-index: 1000;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     nav {
@@ -154,17 +62,29 @@
     }
 
     .logo {
-      font-size: 1.5rem;
-      font-weight: 700;
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid var(--primary);
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+      transition: all 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 30px rgba(0, 212, 255, 0.8);
+    }
+
+    .logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     nav ul {
       display: flex;
-      gap: 2.5rem;
+      gap: 3rem;
       list-style: none;
     }
 
@@ -172,6 +92,7 @@
       color: var(--text-primary);
       text-decoration: none;
       font-weight: 500;
+      font-size: 1.05rem;
       transition: all 0.3s;
       position: relative;
     }
@@ -183,8 +104,12 @@
       left: 0;
       width: 0;
       height: 2px;
-      background: var(--gradient);
+      background: var(--primary);
       transition: width 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--primary);
     }
 
     nav a:hover::after {
@@ -196,7 +121,7 @@
       min-height: 100vh;
       display: flex;
       align-items: center;
-      padding: 8rem 5% 4rem;
+      padding: 10rem 5% 4rem;
     }
 
     .hero-container {
@@ -204,15 +129,15 @@
       margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 4rem;
+      gap: 6rem;
       align-items: center;
     }
 
     .hero-text h1 {
-      font-size: 4rem;
+      font-size: 4.5rem;
       font-weight: 800;
-      margin-bottom: 1rem;
-      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      line-height: 1.1;
       animation: fadeInUp 1s ease-out;
     }
 
@@ -228,71 +153,102 @@
     }
 
     .hero-text .tagline {
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       color: var(--text-secondary);
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
       animation: fadeInUp 1s ease-out 0.2s both;
     }
 
     .hero-text .bio {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       color: var(--text-secondary);
-      margin-bottom: 2rem;
-      line-height: 1.8;
+      margin-bottom: 2.5rem;
+      line-height: 1.9;
       animation: fadeInUp 1s ease-out 0.4s both;
     }
 
     .gradient-text {
-      background: var(--gradient);
+      background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      background-size: 200% 200%;
+      animation: gradientShift 3s ease infinite;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
     }
 
     .badge {
       display: inline-block;
-      background: rgba(99, 102, 241, 0.1);
+      background: rgba(0, 212, 255, 0.1);
       border: 1px solid var(--primary);
       color: var(--primary);
-      padding: 0.5rem 1rem;
+      padding: 0.6rem 1.3rem;
       border-radius: 50px;
-      font-size: 0.9rem;
+      font-size: 1rem;
       font-weight: 600;
       margin-bottom: 2rem;
       animation: glow-pulse 2s ease-in-out infinite;
     }
 
     @keyframes glow-pulse {
-      0%, 100% { box-shadow: 0 0 10px rgba(99, 102, 241, 0.3); }
-      50% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.6); }
+      0%, 100% { box-shadow: 0 0 10px rgba(0, 212, 255, 0.3); }
+      50% { box-shadow: 0 0 25px rgba(0, 212, 255, 0.6); }
     }
 
     .social-links {
       display: flex;
-      gap: 1rem;
-      margin-top: 2rem;
+      gap: 1.5rem;
+      margin-top: 2.5rem;
     }
 
     .social-links a {
-      width: 50px;
-      height: 50px;
+      width: 65px;
+      height: 65px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.03);
+      border: 2px solid rgba(255, 255, 255, 0.1);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--text-primary);
-      font-size: 1.2rem;
+      font-size: 1.8rem;
       transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .social-links a::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: var(--gradient);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .social-links a i {
+      position: relative;
+      z-index: 1;
+    }
+
+    .social-links a:hover::before {
+      opacity: 1;
     }
 
     .social-links a:hover {
-      background: var(--gradient);
       border-color: transparent;
-      transform: translateY(-5px) scale(1.1);
-      box-shadow: 0 10px 30px rgba(99, 102, 241, 0.5);
+      transform: translateY(-8px) scale(1.15);
+      box-shadow: 0 15px 40px rgba(0, 212, 255, 0.6);
     }
+
+    .social-links a:nth-child(1) i { color: #ea4335; }
+    .social-links a:nth-child(2) i { color: #0077b5; }
+    .social-links a:nth-child(3) i { color: #ffffff; }
+    .social-links a:nth-child(4) i { color: #ffa116; }
 
     .hero-image {
       position: relative;
@@ -314,18 +270,35 @@
 
     .profile-card {
       position: relative;
-      width: 400px;
-      height: 400px;
+      width: 450px;
+      height: 450px;
       border-radius: 50%;
-      background: var(--gradient);
-      padding: 8px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      padding: 10px;
       animation: float-profile 6s ease-in-out infinite;
-      box-shadow: 0 20px 60px rgba(99, 102, 241, 0.4);
+      box-shadow: 0 25px 70px rgba(0, 212, 255, 0.4);
     }
 
     @keyframes float-profile {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-25px) rotate(5deg); }
+    }
+
+    .profile-card::before {
+      content: '';
+      position: absolute;
+      inset: -5px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+      z-index: -1;
+      filter: blur(20px);
+      opacity: 0.7;
+      animation: rotateBorder 3s linear infinite;
+    }
+
+    @keyframes rotateBorder {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
     .profile-card img {
@@ -335,20 +308,17 @@
       object-fit: cover;
     }
 
-    /* Enhanced Skills Section with Scrolling Animation */
+    /* Skills Section */
     .skills {
-      padding: 6rem 5%;
-      background: rgba(30, 41, 59, 0.5);
-      backdrop-filter: blur(10px);
+      padding: 8rem 5%;
       position: relative;
-      overflow: hidden;
     }
 
     .section-title {
       text-align: center;
-      font-size: 3rem;
+      font-size: 3.5rem;
       font-weight: 800;
-      margin-bottom: 4rem;
+      margin-bottom: 5rem;
       position: relative;
       display: inline-block;
       width: 100%;
@@ -357,13 +327,14 @@
     .section-title::before {
       content: '';
       position: absolute;
-      bottom: -10px;
+      bottom: -15px;
       left: 50%;
       transform: translateX(-50%);
-      width: 100px;
-      height: 4px;
-      background: var(--gradient);
-      border-radius: 2px;
+      width: 120px;
+      height: 5px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+      border-radius: 3px;
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
     }
 
     .tech-stack-container {
@@ -374,32 +345,28 @@
 
     .scroll-wrapper {
       overflow: hidden;
-      padding: 2rem 0;
-      mask-image: linear-gradient(
-        to right,
-        transparent,
-        black 10%,
-        black 90%,
-        transparent
-      );
-      -webkit-mask-image: linear-gradient(
-        to right,
-        transparent,
-        black 10%,
-        black 90%,
-        transparent
-      );
+      padding: 2.5rem 0;
+      mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
     }
 
     .scroll-content {
       display: flex;
       gap: 3rem;
-      animation: scroll-left 30s linear infinite;
+      animation: scroll-left 35s linear infinite;
       width: fit-content;
     }
 
+    .scroll-content:hover {
+      animation-play-state: paused;
+    }
+
     .scroll-content.reverse {
-      animation: scroll-right 30s linear infinite;
+      animation: scroll-right 35s linear infinite;
+    }
+
+    .scroll-content.reverse:hover {
+      animation-play-state: paused;
     }
 
     @keyframes scroll-left {
@@ -416,200 +383,280 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 1rem;
-      min-width: 120px;
-      padding: 1.5rem;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 15px;
-      transition: all 0.4s ease;
+      gap: 1.2rem;
+      min-width: 140px;
+      padding: 2rem 1.5rem;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
       cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tech-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+      transition: left 0.6s;
+    }
+
+    .tech-item:hover::before {
+      left: 100%;
     }
 
     .tech-item:hover {
-      background: rgba(99, 102, 241, 0.15);
+      background: rgba(0, 212, 255, 0.08);
       border-color: var(--primary);
-      transform: translateY(-10px) scale(1.05);
-      box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4);
+      transform: translateY(-12px) scale(1.08);
+      box-shadow: 0 20px 50px rgba(0, 212, 255, 0.4);
     }
 
     .tech-item img {
-      width: 65px;
-      height: 65px;
+      width: 75px;
+      height: 75px;
       object-fit: contain;
-      transition: all 0.4s ease;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.3));
     }
 
     .tech-item:hover img {
-      transform: scale(1.2) rotate(5deg);
+      transform: scale(1.2) rotate(10deg);
+      filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.6));
     }
 
     .tech-item span {
-      font-size: 0.95rem;
-      font-weight: 500;
+      font-size: 1rem;
+      font-weight: 600;
       color: var(--text-primary);
       text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .tech-item:hover span {
+      color: var(--primary);
     }
 
     .scroll-row {
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
     }
 
     /* Projects Section */
     .projects {
-      padding: 6rem 5%;
+      padding: 8rem 5%;
+      position: relative;
     }
 
     .projects-grid {
       max-width: 1400px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 2.5rem;
     }
 
     .project-card {
       background: var(--bg-card);
-      border-radius: 20px;
+      border-radius: 25px;
       overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      transition: all 0.4s ease;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
       cursor: pointer;
+      position: relative;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(123, 44, 191, 0.1));
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+
+    .project-card:hover::before {
+      opacity: 1;
     }
 
     .project-card:hover {
-      transform: translateY(-15px);
-      box-shadow: 0 25px 50px rgba(99, 102, 241, 0.4);
+      transform: translateY(-18px);
+      box-shadow: 0 30px 60px rgba(0, 212, 255, 0.4);
       border-color: var(--primary);
     }
 
     .project-image {
       width: 100%;
-      height: 220px;
+      height: 240px;
       object-fit: cover;
-      transition: all 0.6s ease;
+      transition: all 0.7s ease;
     }
 
     .project-card:hover .project-image {
-      transform: scale(1.1);
+      transform: scale(1.12);
     }
 
     .project-content {
-      padding: 1.5rem;
+      padding: 2rem;
+      position: relative;
+      z-index: 1;
     }
 
     .project-content h3 {
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
+      font-size: 1.6rem;
+      margin-bottom: 0.8rem;
     }
 
     .project-content p {
       color: var(--text-secondary);
-      margin-bottom: 1rem;
-      font-size: 0.95rem;
+      margin-bottom: 1.3rem;
+      font-size: 1rem;
+      line-height: 1.7;
     }
 
     .tech-stack {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
+      gap: 0.6rem;
+      margin-bottom: 1.3rem;
     }
 
     .tech-tag {
-      background: rgba(99, 102, 241, 0.1);
+      background: rgba(0, 212, 255, 0.1);
       color: var(--primary);
-      padding: 0.3rem 0.8rem;
+      padding: 0.4rem 1rem;
       border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: 500;
+      font-size: 0.9rem;
+      font-weight: 600;
       transition: all 0.3s ease;
+      border: 1px solid rgba(0, 212, 255, 0.3);
     }
 
     .tech-tag:hover {
-      background: rgba(99, 102, 241, 0.2);
-      transform: translateY(-2px);
+      background: rgba(0, 212, 255, 0.2);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
     }
 
     .project-link {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.6rem;
       color: var(--primary);
-      font-weight: 600;
+      font-weight: 700;
       text-decoration: none;
       transition: all 0.3s ease;
+      font-size: 1rem;
     }
 
     .project-link:hover {
-      gap: 1rem;
+      gap: 1.2rem;
     }
 
     /* Contact Section */
     .contact {
-      padding: 6rem 5%;
-      background: rgba(30, 41, 59, 0.5);
-      backdrop-filter: blur(10px);
+      padding: 8rem 5%;
       text-align: center;
+      position: relative;
     }
 
     .contact-content {
-      max-width: 800px;
+      max-width: 900px;
       margin: 0 auto;
     }
 
     .contact-content p {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       color: var(--text-secondary);
-      margin-bottom: 2rem;
+      margin-bottom: 3rem;
+      line-height: 1.8;
     }
 
     .cta-buttons {
       display: flex;
-      gap: 1rem;
+      gap: 1.5rem;
       justify-content: center;
       flex-wrap: wrap;
     }
 
     .btn {
-      padding: 1rem 2rem;
+      padding: 1.2rem 2.5rem;
       border-radius: 50px;
-      font-weight: 600;
+      font-weight: 700;
       text-decoration: none;
       transition: all 0.4s ease;
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.8rem;
+      font-size: 1.1rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+
+    .btn:hover::before {
+      width: 300px;
+      height: 300px;
     }
 
     .btn-primary {
-      background: var(--gradient);
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
       color: white;
       border: none;
+      position: relative;
+      z-index: 1;
     }
 
     .btn-primary:hover {
-      transform: translateY(-5px) scale(1.05);
-      box-shadow: 0 15px 40px rgba(99, 102, 241, 0.5);
+      transform: translateY(-6px) scale(1.05);
+      box-shadow: 0 20px 50px rgba(0, 212, 255, 0.5);
     }
 
     .btn-secondary {
       background: transparent;
       color: var(--text-primary);
       border: 2px solid var(--primary);
+      position: relative;
+      z-index: 1;
     }
 
     .btn-secondary:hover {
       background: var(--primary);
-      transform: translateY(-5px) scale(1.05);
+      transform: translateY(-6px) scale(1.05);
+      box-shadow: 0 20px 50px rgba(0, 212, 255, 0.3);
     }
 
     /* Footer */
     footer {
-      padding: 2rem 5%;
+      padding: 2.5rem 5%;
       text-align: center;
       color: var(--text-secondary);
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 1rem;
+    }
+
+    /* Smooth Scroll */
+    html {
+      scroll-behavior: smooth;
     }
 
     /* Responsive */
@@ -617,19 +664,24 @@
       .hero-container {
         grid-template-columns: 1fr;
         text-align: center;
+        gap: 4rem;
       }
 
       .hero-text h1 {
-        font-size: 3rem;
+        font-size: 3.5rem;
       }
 
       .profile-card {
-        width: 300px;
-        height: 300px;
+        width: 350px;
+        height: 350px;
       }
 
       .projects-grid {
         grid-template-columns: 1fr;
+      }
+
+      .social-links {
+        justify-content: center;
       }
     }
 
@@ -639,25 +691,28 @@
       }
 
       .hero-text h1 {
-        font-size: 2.5rem;
+        font-size: 2.8rem;
       }
 
       .section-title {
-        font-size: 2rem;
+        font-size: 2.5rem;
+      }
+
+      .profile-card {
+        width: 280px;
+        height: 280px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="bg-animation">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
+  <canvas id="space-canvas"></canvas>
 
   <header>
     <nav>
-      <div class="logo">AP</div>
+      <div class="logo">
+        <img src="/images/profile.jpg" alt="Akash Patil">
+      </div>
       <ul>
         <li><a href="#home">Home</a></li>
         <li><a href="#skills">Skills</a></li>
@@ -672,7 +727,7 @@
       <div class="hero-text">
         <div class="badge">🏆 SIH'25 Finalist | VJTI CE'27</div>
         <h1>Hi, I'm <span class="gradient-text">Akash Patil</span></h1>
-        <p class="tagline">Full-Stack Developer | GenAI Specialist | Agentic AI Enthusiast</p>
+        <p class="tagline">Full-Stack Developer | GenAI | Agentic AI Enthusiast</p>
         <p class="bio">
           Third-year Computer Engineering student at VJTI Mumbai specializing in full-stack development and generative AI. I build intelligent, scalable applications that leverage AI agents to enhance user experiences and automate complex workflows.
         </p>
@@ -694,173 +749,59 @@
   <section id="skills" class="skills">
     <h2 class="section-title">Tech <span class="gradient-text">Stack</span></h2>
     <div class="tech-stack-container">
-      <!-- Row 1: Left to Right -->
       <div class="scroll-row">
         <div class="scroll-wrapper">
           <div class="scroll-content">
-            <div class="tech-item">
-              <img src="https://techstack-generator.vercel.app/js-icon.svg" alt="JavaScript">
-              <span>JavaScript</span>
-            </div>
-            <div class="tech-item">
-              <img src="https://techstack-generator.vercel.app/ts-icon.svg" alt="TypeScript">
-              <span>TypeScript</span>
-            </div>
-            <div class="tech-item">
-              <img src="https://techstack-generator.vercel.app/cpp-icon.svg" alt="C++">
-              <span>C++</span>
-            </div>
-            <div class="tech-item">
-              <img src="https://techstack-generator.vercel.app/python-icon.svg" alt="Python">
-              <span>Python</span>
-            </div>
-            <div class="tech-item">
-              <img src="https://techstack-generator.vercel.app/react-icon.svg" alt="React">
-              <span>React.js</span>
-            </div>
-            <div class="tech-item">
-              <img src="https://skillicons.dev/icons?i=nextjs" alt="Next.js">
-              <span>Next.js</span>
-            </div>
-            <!-- Duplicate for seamless loop -->
-            <div class="tech-item">
-              <img src="https://techstack-generator.vercel.app/js-icon.svg" alt="JavaScript">
-              <span>JavaScript</span>
-            </div>
-            <div class="tech-item">
-              <img src="https://techstack-generator.vercel.app/ts-icon.svg" alt="TypeScript">
-              <span>TypeScript</span>
-            </div>
-            <div class="tech-item">
-              <img src="https://techstack-generator.vercel.app/cpp-icon.svg" alt="C++">
-              <span>C++</span>
-            </div>
-            <div class="tech-item">
-              <img src="https://techstack-generator.vercel.app/python-icon.svg" alt="Python">
-              <span>Python</span>
-            </div>
-            <div class="tech-item">
-              <img src="https://techstack-generator.vercel.app/react-icon.svg" alt="React">
-              <span>React.js</span>
-            </div>
-            <div class="tech-item">
-              <img src="https://skillicons.dev/icons?i=nextjs" alt="Next.js">
-              <span>Next.js</span>
-            </div>
+            <div class="tech-item"><img src="https://techstack-generator.vercel.app/js-icon.svg" alt="JavaScript"><span>JavaScript</span></div>
+            <div class="tech-item"><img src="https://techstack-generator.vercel.app/ts-icon.svg" alt="TypeScript"><span>TypeScript</span></div>
+            <div class="tech-item"><img src="https://techstack-generator.vercel.app/cpp-icon.svg" alt="C++"><span>C++</span></div>
+            <div class="tech-item"><img src="https://techstack-generator.vercel.app/python-icon.svg" alt="Python"><span>Python</span></div>
+            <div class="tech-item"><img src="https://techstack-generator.vercel.app/react-icon.svg" alt="React"><span>React.js</span></div>
+            <div class="tech-item"><img src="https://skillicons.dev/icons?i=nextjs" alt="Next.js"><span>Next.js</span></div>
+            <div class="tech-item"><img src="https://techstack-generator.vercel.app/js-icon.svg" alt="JavaScript"><span>JavaScript</span></div>
+            <div class="tech-item"><img src="https://techstack-generator.vercel.app/ts-icon.svg" alt="TypeScript"><span>TypeScript</span></div>
+            <div class="tech-item"><img src="https://techstack-generator.vercel.app/cpp-icon.svg" alt="C++"><span>C++</span></div>
+            <div class="tech-item"><img src="https://techstack-generator.vercel.app/python-icon.svg" alt="Python"><span>Python</span></div>
+            <div class="tech-item"><img src="https://techstack-generator.vercel.app/react-icon.svg" alt="React"><span>React.js</span></div>
+            <div class="tech-item"><img src="https://skillicons.dev/icons?i=nextjs" alt="Next.js"><span>Next.js</span></div>
           </div>
         </div>
       </div>
 
-      <!-- Row 2: Right to Left -->
       <div class="scroll-row">
         <div class="scroll-wrapper">
           <div class="scroll-content reverse">
-            <div class="tech-item">
-              <img src="https://skillicons.dev/icons?i=nodejs" alt="Node.js">
-              <span>Node.js</span>
-            </div>
-            <div class="tech-item">
-              <img src="https://skillicons.dev/icons?i=express" alt="Express">
-              <span>Express.js</span>
-            </div>
-            <div class="tech-item">
-              <img src="https://skillicons.dev/icons?i=mongodb" alt="MongoDB">
-              <span>MongoDB</span>
-            </div>
-            <div class="tech-item">
-              <img src="https://techstack-generator.vercel.app/mysql-icon.svg" alt="SQL">
-              <span>SQL</span>
-            </div>
-            <div class="tech-item">
-              <img src="https://skillicons.dev/icons?i=redis" alt="Redis">
-              <span>Redis</span>
-            </div>
-            <div class="tech-item">
-              <img src="https://skillicons.dev/icons?i=tailwind" alt="Tailwind">
-              <span>Tailwind CSS</span>
-            </div>
-            <!-- Duplicate for seamless loop -->
-            <div class="tech-item">
-              <img src="https://skillicons.dev/icons?i=nodejs" alt="Node.js">
-              <span>Node.js</span>
-            </div>
-            <div class="tech-item">
-              <img src="https://skillicons.dev/icons?i=express" alt="Express">
-              <span>Express.js</span>
-            </div>
-            <div class="tech-item">
-              <img src="https://skillicons.dev/icons?i=mongodb" alt="MongoDB">
-              <span>MongoDB</span>
-            </div>
-            <div class="tech-item">
-              <img src="https://techstack-generator.vercel.app/mysql-icon.svg" alt="SQL">
-              <span>SQL</span>
-            </div>
-            <div class="tech-item">
-              <img src="https://skillicons.dev/icons?i=redis" alt="Redis">
-              <span>Redis</span>
-            </div>
-            <div class="tech-item">
-              <img src="https://skillicons.dev/icons?i=tailwind" alt="Tailwind">
-              <span>Tailwind CSS</span>
-            </div>
+            <div class="tech-item"><img src="https://skillicons.dev/icons?i=nodejs" alt="Node.js"><span>Node.js</span></div>
+            <div class="tech-item"><img src="https://skillicons.dev/icons?i=express" alt="Express"><span>Express.js</span></div>
+            <div class="tech-item"><img src="https://skillicons.dev/icons?i=mongodb" alt="MongoDB"><span>MongoDB</span></div>
+            <div class="tech-item"><img src="https://techstack-generator.vercel.app/mysql-icon.svg" alt="SQL"><span>SQL</span></div>
+            <div class="tech-item"><img src="https://skillicons.dev/icons?i=redis" alt="Redis"><span>Redis</span></div>
+            <div class="tech-item"><img src="https://skillicons.dev/icons?i=tailwind" alt="Tailwind"><span>Tailwind CSS</span></div>
+            <div class="tech-item"><img src="https://skillicons.dev/icons?i=nodejs" alt="Node.js"><span>Node.js</span></div>
+            <div class="tech-item"><img src="https://skillicons.dev/icons?i=express" alt="Express"><span>Express.js</span></div>
+            <div class="tech-item"><img src="https://skillicons.dev/icons?i=mongodb" alt="MongoDB"><span>MongoDB</span></div>
+            <div class="tech-item"><img src="https://techstack-generator.vercel.app/mysql-icon.svg" alt="SQL"><span>SQL</span></div>
+            <div class="tech-item"><img src="https://skillicons.dev/icons?i=redis" alt="Redis"><span>Redis</span></div>
+            <div class="tech-item"><img src="https://skillicons.dev/icons?i=tailwind" alt="Tailwind"><span>Tailwind CSS</span></div>
           </div>
         </div>
       </div>
 
-      <!-- Row 3: Left to Right -->
       <div class="scroll-row">
         <div class="scroll-wrapper">
           <div class="scroll-content">
-            <div class="tech-item">
-              <img src="https://skillicons.dev/icons?i=docker" alt="Docker">
-              <span>Docker</span>
-            </div>
-            <div class="tech-item">
-              <img src="https://skillicons.dev/icons?i=git" alt="Git">
-              <span>Git</span>
-            </div>
-            <div class="tech-item">
-              <img src="https://skillicons.dev/icons?i=postman" alt="Postman">
-              <span>Postman</span>
-            </div>
-            <div class="tech-item">
-              <img src="https://avatars.githubusercontent.com/u/126733545?s=200&v=4" alt="LangChain">
-              <span>LangChain</span>
-            </div>
-            <div class="tech-item">
-              <img src="https://skillicons.dev/icons?i=linux" alt="Linux">
-              <span>Linux</span>
-            </div>
-            <div class="tech-item">
-              <img src="https://skillicons.dev/icons?i=vscode" alt="VS Code">
-              <span>VS Code</span>
-            </div>
-            <!-- Duplicate for seamless loop -->
-            <div class="tech-item">
-              <img src="https://skillicons.dev/icons?i=docker" alt="Docker">
-              <span>Docker</span>
-            </div>
-            <div class="tech-item">
-              <img src="https://skillicons.dev/icons?i=git" alt="Git">
-              <span>Git</span>
-            </div>
-            <div class="tech-item">
-              <img src="https://skillicons.dev/icons?i=postman" alt="Postman">
-              <span>Postman</span>
-            </div>
-            <div class="tech-item">
-              <img src="https://avatars.githubusercontent.com/u/126733545?s=200&v=4" alt="LangChain">
-              <span>LangChain</span>
-            </div>
-            <div class="tech-item">
-              <img src="https://skillicons.dev/icons?i=linux" alt="Linux">
-              <span>Linux</span>
-            </div>
-            <div class="tech-item">
-              <img src="https://skillicons.dev/icons?i=vscode" alt="VS Code">
-              <span>VS Code</span>
-            </div>
+            <div class="tech-item"><img src="https://skillicons.dev/icons?i=docker" alt="Docker"><span>Docker</span></div>
+            <div class="tech-item"><img src="https://skillicons.dev/icons?i=git" alt="Git"><span>Git</span></div>
+            <div class="tech-item"><img src="https://skillicons.dev/icons?i=postman" alt="Postman"><span>Postman</span></div>
+            <div class="tech-item"><img src="https://avatars.githubusercontent.com/u/126733545?s=200&v=4" alt="LangChain"><span>LangChain</span></div>
+            <div class="tech-item"><img src="https://skillicons.dev/icons?i=linux" alt="Linux"><span>Linux</span></div>
+            <div class="tech-item"><img src="https://skillicons.dev/icons?i=vscode" alt="VS Code"><span>VS Code</span></div>
+            <div class="tech-item"><img src="https://skillicons.dev/icons?i=docker" alt="Docker"><span>Docker</span></div>
+            <div class="tech-item"><img src="https://skillicons.dev/icons?i=git" alt="Git"><span>Git</span></div>
+            <div class="tech-item"><img src="https://skillicons.dev/icons?i=postman" alt="Postman"><span>Postman</span></div>
+            <div class="tech-item"><img src="https://avatars.githubusercontent.com/u/126733545?s=200&v=4" alt="LangChain"><span>LangChain</span></div>
+            <div class="tech-item"><img src="https://skillicons.dev/icons?i=linux" alt="Linux"><span>Linux</span></div>
+            <div class="tech-item"><img src="https://skillicons.dev/icons?i=vscode" alt="VS Code"><span>VS Code</span></div>
           </div>
         </div>
       </div>
