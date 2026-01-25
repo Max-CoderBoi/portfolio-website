@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,13 +25,13 @@
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #000000;
+      background: var(--bg-dark);
       color: var(--text-primary);
       line-height: 1.6;
       overflow-x: hidden;
     }
 
-    /* Pure Black Space Background with Stars */
+    /* Space Background with Enhanced Stars */
     #space-canvas {
       position: fixed;
       top: 0;
@@ -40,7 +39,37 @@
       width: 100%;
       height: 100%;
       z-index: -1;
-      background: #000000;
+      background: 
+        radial-gradient(ellipse at 20% 30%, rgba(255, 100, 50, 0.15), transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(100, 50, 255, 0.15), transparent 50%),
+        radial-gradient(ellipse at 40% 70%, rgba(255, 200, 100, 0.1), transparent 50%),
+        radial-gradient(ellipse at bottom, #1a1a2e 0%, #0f0f1e 100%);
+    }
+
+    .nebula {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      opacity: 0.4;
+      background: 
+        radial-gradient(ellipse at 30% 40%, rgba(255, 80, 120, 0.2), transparent 40%),
+        radial-gradient(ellipse at 70% 60%, rgba(80, 120, 255, 0.2), transparent 40%),
+        radial-gradient(ellipse at 50% 80%, rgba(255, 180, 80, 0.15), transparent 35%);
+      animation: nebula-shift 20s ease-in-out infinite;
+    }
+
+    @keyframes nebula-shift {
+      0%, 100% { 
+        transform: scale(1) rotate(0deg);
+        opacity: 0.4;
+      }
+      50% { 
+        transform: scale(1.1) rotate(5deg);
+        opacity: 0.5;
+      }
     }
 
     .star {
@@ -94,6 +123,144 @@
       }
       100% {
         transform: translate(-1000px, 500px) rotate(0deg);
+        opacity: 0;
+      }
+    }
+
+    /* Floating Space Objects */
+    .astronaut {
+      position: fixed;
+      font-size: 60px;
+      z-index: 5;
+      pointer-events: none;
+      animation: float-astronaut 25s ease-in-out infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes float-astronaut {
+      0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+      25% {
+        transform: translate(100px, -80px) rotate(15deg);
+      }
+      50% {
+        transform: translate(200px, -40px) rotate(-10deg);
+      }
+      75% {
+        transform: translate(100px, -100px) rotate(20deg);
+      }
+    }
+
+    .planet {
+      position: fixed;
+      font-size: 100px;
+      z-index: 5;
+      pointer-events: none;
+      animation: drift-planet 50s linear infinite;
+      opacity: 0.6;
+      filter: drop-shadow(0 0 30px rgba(255, 100, 200, 0.4));
+    }
+
+    @keyframes drift-planet {
+      0% {
+        transform: translate(-200px, 0) rotate(0deg);
+      }
+      100% {
+        transform: translate(calc(100vw + 200px), 0) rotate(360deg);
+      }
+    }
+
+    .ufo {
+      position: fixed;
+      font-size: 50px;
+      z-index: 5;
+      pointer-events: none;
+      animation: fly-ufo 30s linear infinite;
+      opacity: 0.8;
+      filter: drop-shadow(0 0 20px rgba(0, 255, 200, 0.6));
+    }
+
+    @keyframes fly-ufo {
+      0% {
+        transform: translate(100vw, 20vh);
+      }
+      100% {
+        transform: translate(-200px, 80vh);
+      }
+    }
+
+    .rocket {
+      position: fixed;
+      font-size: 55px;
+      z-index: 5;
+      pointer-events: none;
+      animation: launch-rocket 20s ease-in-out infinite;
+      opacity: 0.75;
+      filter: drop-shadow(0 0 25px rgba(255, 150, 0, 0.5));
+    }
+
+    @keyframes launch-rocket {
+      0%, 100% {
+        transform: translate(0, 100vh) rotate(45deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.75;
+      }
+      50% {
+        transform: translate(50vw, -200px) rotate(45deg);
+        opacity: 0.75;
+      }
+      90% {
+        opacity: 0.75;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+
+    .satellite {
+      position: fixed;
+      font-size: 45px;
+      z-index: 5;
+      pointer-events: none;
+      animation: orbit-satellite 35s linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes orbit-satellite {
+      0% {
+        transform: translate(50vw, 10vh) rotate(0deg);
+      }
+      100% {
+        transform: translate(50vw, 10vh) rotate(360deg);
+        transform-origin: -100px 200px;
+      }
+    }
+
+    .comet {
+      position: fixed;
+      font-size: 40px;
+      z-index: 5;
+      pointer-events: none;
+      animation: comet-streak 12s linear infinite;
+      opacity: 0;
+    }
+
+    @keyframes comet-streak {
+      0%, 10% {
+        transform: translate(100vw, -100px) rotate(-45deg);
+        opacity: 0;
+      }
+      15% {
+        opacity: 0.9;
+      }
+      40% {
+        opacity: 0.9;
+      }
+      50%, 100% {
+        transform: translate(-300px, 100vh) rotate(-45deg);
         opacity: 0;
       }
     }
@@ -778,6 +945,15 @@
 <body>
   <div id="space-canvas"></div>
   <div class="nebula"></div>
+  <div class="constellation"></div>
+
+  <!-- Floating Space Elements -->
+  <div class="astronaut" style="left: 10%; top: 15%;">🧑‍🚀</div>
+  <div class="planet" style="top: 30%;">🪐</div>
+  <div class="ufo" style="top: 10%;">🛸</div>
+  <div class="rocket" style="left: 80%;">🚀</div>
+  <div class="satellite" style="left: 60%; top: 25%;">🛰️</div>
+  <div class="comet" style="left: 70%; top: 5%;">☄️</div>
 
   <header>
     <nav>
@@ -992,31 +1168,81 @@
   </footer>
 
   <script>
-    // Create space background with stars
+    // Create enhanced space background
     function createSpace() {
       const canvas = document.getElementById('space-canvas');
+      const constellation = document.querySelector('.constellation');
       
-      // Create static stars with varied sizes
-      for (let i = 0; i < 200; i++) {
-        const star = document.createElement('div');
-        star.className = 'star';
-        const size = Math.random() * 2 + 1;
-        star.style.width = size + 'px';
-        star.style.height = size + 'px';
-        star.style.left = Math.random() * 100 + '%';
-        star.style.top = Math.random() * 100 + '%';
-        star.style.animationDelay = Math.random() * 3 + 's';
-        star.style.animationDuration = (Math.random() * 2 + 2) + 's';
-        canvas.appendChild(star);
+      // Create varied static stars (small, medium, large)
+      const starSizes = [
+        { count: 150, minSize: 1, maxSize: 2 },
+        { count: 80, minSize: 2, maxSize: 3 },
+        { count: 30, minSize: 3, maxSize: 4 }
+      ];
+      
+      starSizes.forEach(config => {
+        for (let i = 0; i < config.count; i++) {
+          const star = document.createElement('div');
+          star.className = 'star';
+          const size = Math.random() * (config.maxSize - config.minSize) + config.minSize;
+          star.style.width = size + 'px';
+          star.style.height = size + 'px';
+          star.style.left = Math.random() * 100 + '%';
+          star.style.top = Math.random() * 100 + '%';
+          star.style.animationDelay = Math.random() * 3 + 's';
+          star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+          
+          // Add color variation to some stars
+          if (Math.random() > 0.85) {
+            const colors = ['rgba(255, 200, 200, 0.9)', 'rgba(200, 220, 255, 0.9)', 'rgba(255, 255, 200, 0.9)'];
+            star.style.background = colors[Math.floor(Math.random() * colors.length)];
+          }
+          
+          canvas.appendChild(star);
+        }
+      });
+      
+      // Create constellation lines connecting random stars
+      const stars = Array.from(document.querySelectorAll('.star'));
+      const constellationCount = 15;
+      
+      for (let i = 0; i < constellationCount; i++) {
+        const star1 = stars[Math.floor(Math.random() * stars.length)];
+        const star2 = stars[Math.floor(Math.random() * stars.length)];
+        
+        if (star1 && star2 && star1 !== star2) {
+          const x1 = parseFloat(star1.style.left);
+          const y1 = parseFloat(star1.style.top);
+          const x2 = parseFloat(star2.style.left);
+          const y2 = parseFloat(star2.style.top);
+          
+          const distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+          
+          // Only connect nearby stars
+          if (distance < 20) {
+            const line = document.createElement('div');
+            line.className = 'constellation-line';
+            line.style.left = x1 + '%';
+            line.style.top = y1 + '%';
+            line.style.width = distance + '%';
+            
+            const angle = Math.atan2(y2 - y1, x2 - x1) * (180 / Math.PI);
+            line.style.transform = `rotate(${angle}deg)`;
+            line.style.animationDelay = Math.random() * 4 + 's';
+            
+            constellation.appendChild(line);
+          }
+        }
       }
       
-      // Create shooting stars with diagonal tail
+      // Create shooting stars with realistic trails
       function createShootingStar() {
         const shootingStar = document.createElement('div');
         shootingStar.className = 'shooting-star';
         shootingStar.style.left = (Math.random() * 30 + 70) + '%';
         shootingStar.style.top = Math.random() * 30 + '%';
-        const duration = (Math.random() * 1.5 + 2);
+        
+        const duration = (Math.random() * 1.5 + 1.5);
         shootingStar.style.animation = `shoot ${duration}s ease-out forwards`;
         canvas.appendChild(shootingStar);
         
@@ -1025,15 +1251,32 @@
         }, duration * 1000 + 100);
       }
       
-      // Create shooting star every 3-6 seconds
+      // Create shooting stars at random intervals
       setInterval(() => {
-        createShootingStar();
-      }, Math.random() * 3000 + 3000);
+        if (Math.random() > 0.5) {
+          createShootingStar();
+        }
+      }, 3000);
       
       // Initial shooting stars
       setTimeout(createShootingStar, 1000);
-      setTimeout(createShootingStar, 4000);
-      setTimeout(createShootingStar, 7000);
+      setTimeout(createShootingStar, 3500);
+      setTimeout(createShootingStar, 6000);
+      
+      // Pulsing distant stars effect
+      setInterval(() => {
+        const randomStar = stars[Math.floor(Math.random() * stars.length)];
+        if (randomStar && Math.random() > 0.95) {
+          randomStar.style.transition = 'all 0.5s ease';
+          randomStar.style.transform = 'scale(1.8)';
+          randomStar.style.opacity = '1';
+          
+          setTimeout(() => {
+            randomStar.style.transform = 'scale(1)';
+            randomStar.style.opacity = '';
+          }, 500);
+        }
+      }, 200);
     }
     
     createSpace();
@@ -1064,7 +1307,7 @@
       });
     }, observerOptions);
 
-    document.querySelectorAll('.skill-item, .project-card').forEach(el => {
+    document.querySelectorAll('.project-card').forEach(el => {
       el.style.opacity = '0';
       el.style.transform = 'translateY(20px)';
       el.style.transition = 'all 0.6s ease';
